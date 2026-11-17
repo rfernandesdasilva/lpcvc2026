@@ -3,16 +3,14 @@
 Local latency is only for screening. Every claim about speed must come from AI Hub on the S22
 (scripts/aihub_run.py), because rankings can flip between GPU and Snapdragon.
 
-  python scripts/eval_local.py --models clip-b16 clip-b16-norm mobileclip2-s0 mobileclip2-s2
-  python scripts/eval_local.py --data refcocog sample   # default: 5 RefCOCOg folds (pooled) + LPCVC sample
+  python scripts/eval_local.py --exp local-screen-xyz --title "..." --question "..."       --models clip-b16 mobileclip2-s0 --data refcocog sample
+Results go to experiments/NNN_<exp>/ (see lpcvc/experiment.py).
 """
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 import time
-from datetime import datetime, timezone
 from pathlib import Path
 
 import numpy as np
@@ -22,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from lpcvc import metrics  # noqa: E402
 from lpcvc.data import load_lpcvc_sample  # noqa: E402
+from lpcvc.experiment import Experiment  # noqa: E402
 from lpcvc.models import build  # noqa: E402
 
 
@@ -70,8 +69,15 @@ def main():
                     help="presets (sample, refcocog) or dirs under data/ in the official layout")
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     ap.add_argument("--no-timing", action="store_true")
-    ap.add_argument("--out", default=str(ROOT / "results" / "runs"))
+    ap.add_argument("--exp", default="local-screen", help="experiment slug (folder experiments/NNN_<slug>)")
+    ap.add_argument("--title", default="Local screening")
+    ap.add_argument("--question", default="How do these models rank on the validation sets (local PyTorch FP32)?")
     args = ap.parse_args()
+    with Experiment(args.exp, args.title, args.question, args) as exp:
+        run(args, exp)
+
+
+def run(args, exp):
 
     sets = []
     for name, path in resolve_sets(args.data):
@@ -121,17 +127,29 @@ def main():
             sig = "*" if lo > 0 or hi < 0 else " "
             print(f"  {sig} {name:22s} {d*100:+.2f} pts  (95% CI {lo*100:+.1f} .. {hi*100:+.1f})")
 
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-    out = Path(args.out)
-    out.mkdir(parents=True, exist_ok=True)
     meta = {"sets": {ds.name: {"n_images": len(ds), "n_captions": len(ds.captions), "notes": ds.notes}
-                     for ds, _, _ in sets},
-            "device": torch.cuda.get_device_name(0) if args.device == "cuda" else "cpu",
-            "torch": torch.__version__}
-    (out / f"{stamp}_local.json").write_text(json.dumps({"meta": meta, "rows": rows}, indent=2))
-    np.savez(out / f"{stamp}_local_per_image.npz",
-             **{f"{m}|{s}": v for m, d in per_image.items() for s, v in d.items()})
-    print(f"saved {out / (stamp + '_local.json')}")
+                     for ds, _, _ in sets}}
+    exp.save_json("results.json", {"meta": meta, "rows": rows})
+    exp.save_npz("per_image_recall.npz", **{f"{m}|{s}": v for m, d in per_image.items() for s, v in d.items()})
+
+    # README table: one row per model, one column per report group, plus paired delta on the first group
+    g0 = list(groups)[0]
+    a = np.concatenate([per_image[base][m] for m in groups[g0]])
+    hdr = "| Model | " + " | ".join(f"{g} frac R@10 [95% CI]" for g in groups) + f" | delta vs {base} on {g0} [95% CI] |"
+    lines = [hdr, "|" + "---|" * (len(groups) + 2)]
+    for name in args.models:
+        cells = []
+        for g in groups:
+            r = next(r for r in rows if r["model"] == name and r["set"] == g)
+            lo, hi = r["frac_R@10_ci95"]
+            cells.append(f"{r['frac_R@10']*100:.2f} [{lo*100:.1f}, {hi*100:.1f}]")
+        b = np.concatenate([per_image[name][m] for m in groups[g0]])
+        d, lo, hi = metrics.paired_bootstrap_delta(a, b)
+        delta = "-" if name == base else f"{d*100:+.2f} [{lo*100:+.1f}, {hi*100:+.1f}]{' *' if lo > 0 or hi < 0 else ''}"
+        lines.append(f"| {name} | " + " | ".join(cells) + f" | {delta} |")
+    exp.add_table("\n".join(lines) + "\n\n`*` = paired 95% CI excludes 0. Folds of a preset are pooled.")
+    best = max((r for r in rows if r["set"] == g0), key=lambda r: r["frac_R@10"])
+    exp.headline = f"best on {g0}: {best['model']} {best['frac_R@10']*100:.2f}"
 
 
 if __name__ == "__main__":

@@ -11,3 +11,4 @@ checkpoints/
 *.ckpt
 results/runs/*.npz
 results/runs/*.npy
+.cache/

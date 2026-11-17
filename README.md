@@ -18,7 +18,7 @@ conda create -p ./.venv python=3.11 -y          # or python -m venv .venv
 .venv/python -m pip install -r requirements.txt
 .venv/python -m gdown --folder https://drive.google.com/drive/folders/1tTwrehwLtVtMOTjD5beYDC3lcWIfzS5D -O data/lpcvc_sample
 .venv/python scripts/build_val_set.py              # RefCOCOg-LPCVC validation: 5 folds x 300 images (~250 MB)
-qai-hub configure --api_token <YOUR_AI_HUB_TOKEN>   # https://app.aihub.qualcomm.com -> Settings
+& .\scripts\configure_aihub.ps1                   # stores your AI Hub token (hidden prompt)
 .venv/python -m pytest -q tests
 ```
 
@@ -26,9 +26,17 @@ qai-hub configure --api_token <YOUR_AI_HUB_TOKEN>   # https://app.aihub.qualcomm
 
 | Step | Command | Where numbers come from |
 |---|---|---|
-| Screen a model locally | `python scripts/eval_local.py --models clip-b16 mobileclip2-s0` | RTX GPU, PyTorch. Reports RefCOCOg-LPCVC (pooled folds) + sample. |
+| Screen models locally | `python scripts/eval_local.py --exp <slug> --title ... --question ... --models clip-b16 mobileclip2-s0` | RTX GPU, PyTorch. RefCOCOg-LPCVC (pooled folds) + sample. |
 | Export + ONNX parity | `python scripts/export_onnx.py --model mobileclip2-s0` | Checks ONNX vs PyTorch on real inputs. |
-| Measure on device | `python scripts/aihub_run.py --model mobileclip2-s0 --profile-runs 3` | S22, QNN. **The only latency we report.** |
+| Measure on device | `python scripts/aihub_run.py --exp <slug> --models clip-b16 mobileclip2-s0 --profile-runs 3` | S22, QNN. **The only latency we report.** |
+
+### Experiments are numbered and self-describing
+Every run of `eval_local.py` / `aihub_run.py` writes `experiments/NNN_<slug>/`:
+`README.md` (question, exact reproduce command, results table, **Conclusions written by us**), `manifest.json`
+(command, git commit, dirty flag, versions, GPU, args), `log.txt` (full console output) and raw results
+(per-image recalls, AI Hub job IDs, downloaded profiles, device embeddings). `experiments/INDEX.md` lists them all in
+order. Rules: commit code before running (the manifest records the commit), use a new slug per question, fill in
+*Conclusions* right after a run, and never delete failed experiments.
 
 Model names (see `lpcvc/models.py`): `clip-b16` (official baseline as shipped), `clip-b16-norm`, `mobileclip2-s0`,
 `mobileclip2-s2`, `mobileclip2-b`; add `@<res>` for a different internal image resolution, e.g. `mobileclip2-s0@192`.
@@ -46,7 +54,6 @@ Model names (see `lpcvc/models.py`): `clip-b16` (official baseline as shipped), 
   which are COCO train2014). Filter COCO, RefCOCO/RefCOCO+ and Visual Genome training data against this list.
   Those datasets share COCO train2014 images.
 - Compile options match the sample: `--target_runtime qnn_dlc --truncate_64bit_io`.
-- Log every run (including failures) in `results/EXPERIMENTS.md`; raw JSON goes to `results/runs/`.
 
 ## Layout
 ```
@@ -54,7 +61,7 @@ lpcvc/          data loading (official preprocessing), metrics, model wrappers
 scripts/        build_val_set.py, eval_local.py, export_onnx.py, aihub_run.py
 splits/         committed validation-fold definitions + reserved (never-train) COCO image IDs
 tests/          scorer equivalence tests
-results/        EXPERIMENTS.md (human log) + runs/ (machine JSON)
+experiments/    INDEX.md + one numbered folder per experiment (see above)
 third_party/    lpcvc_sample (official sample solution), ml-mobileclip (submodules, unmodified)
 ```
 
