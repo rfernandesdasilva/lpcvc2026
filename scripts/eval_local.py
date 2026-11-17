@@ -4,6 +4,7 @@ Local latency is only for screening. Every claim about speed must come from AI H
 (scripts/aihub_run.py), because rankings can flip between GPU and Snapdragon.
 
   python scripts/eval_local.py --models clip-b16 clip-b16-norm mobileclip2-s0 mobileclip2-s2
+  python scripts/eval_local.py --data refcocog sample   # default: 5 RefCOCOg folds (pooled) + LPCVC sample
 """
 from __future__ import annotations
 
@@ -47,52 +48,89 @@ def time_batch1(mod, x, warmup=20, iters=100):
     return float(np.median(ts))
 
 
+PRESETS = {
+    "sample": ["lpcvc_sample"],
+    "refcocog": [f"refcocog_val/fold{k}" for k in range(5)],
+}
+
+
+def resolve_sets(specs: list[str]) -> list[tuple[str, Path]]:
+    out = []
+    for s in specs:
+        for rel in PRESETS.get(s, [s]):
+            p = Path(rel) if Path(rel).is_absolute() else ROOT / "data" / rel
+            out.append((rel, p))
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--models", nargs="+", default=["clip-b16", "clip-b16-norm", "mobileclip2-s0"])
-    ap.add_argument("--data", default=str(ROOT / "data" / "lpcvc_sample"))
+    ap.add_argument("--data", nargs="+", default=["refcocog", "sample"],
+                    help="presets (sample, refcocog) or dirs under data/ in the official layout")
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     ap.add_argument("--no-timing", action="store_true")
     ap.add_argument("--out", default=str(ROOT / "results" / "runs"))
     args = ap.parse_args()
 
-    ds = load_lpcvc_sample(args.data)
-    images, tokens = ds.images(), ds.tokens()
-    print(f"{ds.name}: {len(ds)} images, {len(ds.captions)} captions")
+    sets = []
+    for name, path in resolve_sets(args.data):
+        ds = load_lpcvc_sample(path)
+        ds.name = name
+        sets.append((ds, ds.images(), ds.tokens()))
+        print(f"{name}: {len(ds)} images, {len(ds.captions)} captions")
+    groups = {}  # report group -> list of set names (folds of one preset are pooled)
+    for spec in args.data:
+        groups[spec] = PRESETS.get(spec, [spec])
 
-    rows, per_image = [], {}
+    rows, per_image = [], {}   # per_image[model][set name] = per-image fractional recall
     for name in args.models:
         img_enc, txt_enc = build(name, args.device)
-        ie, te = embed(img_enc, txt_enc, images, tokens, args.device)
-        r = metrics.report(ie, te, ds.gt, ds.txt_ids)
-        per_image[name] = r.pop("per_image")
-        row = {"model": name, **r,
-               "img_params_M": sum(p.numel() for p in img_enc.parameters()) / 1e6,
-               "txt_params_M": sum(p.numel() for p in txt_enc.parameters()) / 1e6}
+        per_image[name] = {}
+        for ds, images, tokens in sets:
+            ie, te = embed(img_enc, txt_enc, images, tokens, args.device)
+            r = metrics.report(ie, te, ds.gt, ds.txt_ids)
+            per_image[name][ds.name] = r.pop("per_image")
+            rows.append({"model": name, "set": ds.name, **r})
+        timing = {}
         if not args.no_timing:
-            row["gpu_img_ms"] = time_batch1(img_enc, torch.from_numpy(images[:1]).to(args.device))
-            row["gpu_txt_ms"] = time_batch1(txt_enc, torch.from_numpy(tokens[:1]).to(args.device))
-        rows.append(row)
-        lo, hi = row["frac_R@10_ci95"]
-        print(f"{name:24s} fracR@10={row['frac_R@10']*100:6.2f}  [{lo*100:5.1f},{hi*100:5.1f}]  "
-              f"hit@10={row['hit@10']*100:6.2f}  hit@1={row['hit@1']*100:6.2f}"
-              + (f"  gpu img/txt ms={row['gpu_img_ms']:.2f}/{row['gpu_txt_ms']:.2f}" if 'gpu_img_ms' in row else ""))
+            _, images, tokens = sets[0]
+            timing = {"gpu_img_ms": time_batch1(img_enc, torch.from_numpy(images[:1]).to(args.device)),
+                      "gpu_txt_ms": time_batch1(txt_enc, torch.from_numpy(tokens[:1]).to(args.device))}
+        params = {"img_params_M": sum(p.numel() for p in img_enc.parameters()) / 1e6,
+                  "txt_params_M": sum(p.numel() for p in txt_enc.parameters()) / 1e6}
+        for g, members in groups.items():
+            per = np.concatenate([per_image[name][m] for m in members])
+            lo, hi = metrics.bootstrap_ci(per)
+            fold_means = [float(per_image[name][m].mean()) for m in members]
+            rows.append({"model": name, "set": g, "frac_R@10": float(per.mean()), "frac_R@10_ci95": (lo, hi),
+                         "fold_means": fold_means, "n_images": len(per), **params, **timing})
+            spread = f" folds {min(fold_means)*100:.1f}-{max(fold_means)*100:.1f}" if len(members) > 1 else ""
+            print(f"{name:22s} {g:10s} fracR@10={per.mean()*100:6.2f} [{lo*100:5.1f},{hi*100:5.1f}] n={len(per)}{spread}"
+                  + (f"  gpu img/txt ms={timing['gpu_img_ms']:.2f}/{timing['gpu_txt_ms']:.2f}" if timing else ""))
         del img_enc, txt_enc
         torch.cuda.empty_cache() if torch.cuda.is_available() else None
 
     base = args.models[0]
-    for name in args.models[1:]:
-        d, lo, hi = metrics.paired_bootstrap_delta(per_image[base], per_image[name])
-        print(f"  {name} - {base}: {d*100:+.2f} pts  (95% paired CI {lo*100:+.1f} .. {hi*100:+.1f})")
+    for g, members in groups.items():
+        print(f"paired deltas vs {base} on {g}:")
+        a = np.concatenate([per_image[base][m] for m in members])
+        for name in args.models[1:]:
+            b = np.concatenate([per_image[name][m] for m in members])
+            d, lo, hi = metrics.paired_bootstrap_delta(a, b)
+            sig = "*" if lo > 0 or hi < 0 else " "
+            print(f"  {sig} {name:22s} {d*100:+.2f} pts  (95% CI {lo*100:+.1f} .. {hi*100:+.1f})")
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
-    meta = {"dataset": ds.name, "n_images": len(ds), "n_captions": len(ds.captions), "notes": ds.notes,
+    meta = {"sets": {ds.name: {"n_images": len(ds), "n_captions": len(ds.captions), "notes": ds.notes}
+                     for ds, _, _ in sets},
             "device": torch.cuda.get_device_name(0) if args.device == "cuda" else "cpu",
             "torch": torch.__version__}
     (out / f"{stamp}_local.json").write_text(json.dumps({"meta": meta, "rows": rows}, indent=2))
-    np.savez(out / f"{stamp}_local_per_image.npz", **per_image)
+    np.savez(out / f"{stamp}_local_per_image.npz",
+             **{f"{m}|{s}": v for m, d in per_image.items() for s, v in d.items()})
     print(f"saved {out / (stamp + '_local.json')}")
 
 
