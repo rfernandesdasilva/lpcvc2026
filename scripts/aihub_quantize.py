@@ -54,7 +54,36 @@ def calib_datasets() -> dict[str, str]:
     return cache["calib_refcocog_train"]
 
 
+QUANT_CACHE = ROOT / ".cache" / "aihub_quantize_jobs.json"
+
+
+def quantize_cached(onnx_path: Path, digest: str, precision: str, calib_id: str, name: str) -> hub.QuantizeJob:
+    """Reuse a successful quantize job for the same float ONNX (by SHA-256) + precision + calibration set."""
+    cache = json.loads(QUANT_CACHE.read_text()) if QUANT_CACHE.exists() else {}
+    key = f"{digest}|{precision}|{calib_id}"
+    if key in cache:
+        job = hub.get_job(cache[key])
+        if not job.get_status().failure:
+            print(f"reusing quantize job {job.job_id} for {name}")
+            return job
+    wd, ad = PRECISIONS[precision]
+    job = hub.submit_quantize_job(model=str(onnx_path), calibration_data=hub.get_dataset(calib_id),
+                                  weights_dtype=wd, activations_dtype=ad, name=name)
+    cache[key] = job.job_id
+    QUANT_CACHE.parent.mkdir(parents=True, exist_ok=True)
+    QUANT_CACHE.write_text(json.dumps(cache, indent=2))
+    return job
+
+
 def find_onnx(path: Path) -> Path:
+    """AI Hub returns QDQ ONNX as a .zip (model.onnx + model.data); extract it next to the download."""
+    if path.is_file() and path.suffix == ".zip":
+        import zipfile
+
+        out = path.with_suffix("").with_suffix("")   # x.onnx.onnx.zip -> x
+        with zipfile.ZipFile(path) as z:
+            z.extractall(out)
+        path = out
     if path.is_file() and path.suffix == ".onnx":
         return path
     hits = sorted(Path(path).rglob("*.onnx"))
@@ -120,11 +149,10 @@ def run(args, exp):
             export(m, onnx_dir)
         for p in args.precisions:
             for enc, (fname, spec) in ENCODERS.items():
-                wd, ad = PRECISIONS[p]
-                qj = hub.submit_quantize_job(model=str(onnx_dir / fname), calibration_data=hub.get_dataset(calib_ids[enc]),
-                                             weights_dtype=wd, activations_dtype=ad, name=f"{tag}_{enc}_{p}")
+                digest = sha256(onnx_dir / fname)
+                qj = quantize_cached(onnx_dir / fname, digest, p, calib_ids[enc], f"{tag}_{enc}_{p}")
                 print(f"quantize {tag}/{enc}/{p}: {qj.url}")
-                jobs[(m, p, enc)] = {"quantize_job": qj, "spec": spec, "float_onnx_sha256": sha256(onnx_dir / fname)}
+                jobs[(m, p, enc)] = {"quantize_job": qj, "spec": spec, "float_onnx_sha256": digest}
 
     # ---- 2) download QDQ ONNX, compile, profile, infer --------------------------------------------
     for (m, p, enc), j in jobs.items():
@@ -258,6 +286,8 @@ def run(args, exp):
                         metrics.similarity(ie, te), sample.gt, sample.txt_ids)
                 combos.append(row)
     exp.save_json("results.json", {"encoders": enc_rows, "combinations": combos})
+    if not any("ms_median" in r for r in enc_rows):
+        raise RuntimeError("no quantized encoder completed on the device; see the errors above")
     exp.save_npz("per_image_recall.npz", **per_image)
 
     g0 = args.data[0]
