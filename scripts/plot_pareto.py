@@ -13,6 +13,14 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 
+def label(m: str) -> str:
+    """Short point label: 'mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt' -> 'mobileclip2-b FT (010)'."""
+    if "#" not in m:
+        return m
+    base, ck = m.split("#", 1)
+    return f"{base} FT ({ck.split('/')[1][:3]})"
+
+
 def main(exp_dirs: list[Path]):
     exp_dir = exp_dirs[-1]
     rows = [r for d in exp_dirs for r in json.loads((d / "results.json").read_text(encoding="utf-8"))["rows"]
@@ -28,9 +36,10 @@ def main(exp_dirs: list[Path]):
     ax.text(35.4, max(p[1] for p in pts), "over\nbudget", color="0.4", fontsize=8, va="top")
     ax.plot(*zip(*front), color="#1f6feb", lw=1.2, zorder=1, label="Pareto front")
     for x, y, m in pts:
-        base = m.startswith("clip")
-        ax.scatter(x, y, s=36, zorder=2, color="#9a6700" if base else "#1f6feb", marker="s" if base else "o")
-        ax.annotate(m, (x, y), textcoords="offset points", xytext=(5, -3), fontsize=7.5)
+        base, ft = m.startswith("clip"), "#" in m
+        ax.scatter(x, y, s=36, zorder=2, color="#9a6700" if base else ("#cf222e" if ft else "#1f6feb"),
+                   marker="s" if base else ("D" if ft else "o"))
+        ax.annotate(label(m), (x, y), textcoords="offset points", xytext=(5, -3), fontsize=7.5)
     ax.set_xlabel("Image + text encoder latency on Galaxy S22, QNN (ms)")
     ax.set_ylabel("Fractional Recall@10, RefCOCOg-LPCVC (%)")
     ax.set_xlim(0, max(40, max(p[0] for p in pts) + 5))

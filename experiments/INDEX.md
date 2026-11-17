@@ -19,3 +19,4 @@ In the order they were run. Each folder has a README (question, how to reproduce
 | [013](013_ft-b-crosssource/README.md) | 2026-11-17 | Fine-tune MobileCLIP2-B on RefCOCO/RefCOCO+ only (cross-source ablation) | ok | mobileclip2-b refcocog: 71.38 -> 84.36 (+12.98) | `b5607aa` |
 | [014](014_wiseft-b/README.md) | 2026-11-17 | WiSE-FT weight blending of fine-tuned B | ok | best on refcocog: mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt 87.28 | `b5607aa` |
 | [015](015_ft-s0-contrastive/README.md) | 2026-11-17 | Fine-tune MobileCLIP2-S0, contrastive (same recipe as 010) | ok | mobileclip2-s0 refcocog: 69.21 -> 82.24 (+13.03) | `b5607aa` |
+| [016](016_s22-finetuned-s0/README.md) | 2026-11-17 | Fine-tuned MobileCLIP2-S0 on the Galaxy S22 | ok | best valid by RefCOCOg: mobileclip2-s0#checkpoints/015_ft-s0-contrastive/model.pt (10.1 ms) | `23a60bc` |
