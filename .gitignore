@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/
+exported/
+checkpoints/
+*.onnx
+*.onnx.data
+*.pt
+*.ckpt
+results/runs/*.npz
+results/runs/*.npy

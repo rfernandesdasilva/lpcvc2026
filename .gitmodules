@@ -1,0 +1,6 @@
+[submodule "third_party/ml-mobileclip"]
+	path = third_party/ml-mobileclip
+	url = https://github.com/apple/ml-mobileclip.git
+[submodule "third_party/lpcvc_sample"]
+	path = third_party/lpcvc_sample
+	url = https://github.com/lpcvai/26LPCVC_Track1_Sample_Solution.git

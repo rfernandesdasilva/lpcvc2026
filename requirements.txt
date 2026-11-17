@@ -1,0 +1,17 @@
+# Install torch first for your CUDA version, e.g.
+#   pip install torch==2.14.1 torchvision==0.29.1 --index-url https://download.pytorch.org/whl/cu126
+open_clip_torch==4.2.2
+timm==1.0.31
+transformers==5.23.0
+qai-hub==0.58.0
+onnx==1.23.2
+onnxruntime==1.32.0
+onnxscript==0.7.2
+numpy==2.4.6
+pandas==3.1.1
+scikit-learn==1.9.1
+pillow==13.0.0
+gdown==6.5.1
+pytest==9.2.0
+tqdm==4.70.1
+matplotlib==3.11.2
