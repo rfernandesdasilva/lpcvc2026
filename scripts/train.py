@@ -10,6 +10,10 @@ Loss (per batch of B images, each with up to K sampled captions):
                 text->image similarity distributions. Teacher embeddings are precomputed once (both flips) and cached.
   total = (1 - alpha) * contrastive + alpha * distill        (alpha = 0 -> plain fine-tuning control)
 
+--chunk N computes the same full-batch loss with gradient caching (GradCache, Gao et al. 2021): embeddings are
+computed without graphs, the loss is backpropagated to them, then each chunk is re-forwarded with its cached
+gradient. Exact up to bf16 rounding (no dropout; BatchNorm stats frozen), so the recipe is unchanged.
+
 No early stopping or checkpoint selection on validation: the recipe is fixed before the run and the LAST epoch is
 the result. Per-epoch validation is logged only to draw learning curves.
 
@@ -176,6 +180,9 @@ def main():
     ap.add_argument("--sources", nargs="*", default=None, choices=["refcoco", "refcocoplus", "refcocog"],
                     help="train only on captions from these datasets (default: all)")
     ap.add_argument("--freeze", choices=["none", "image", "text"], default="none")
+    ap.add_argument("--chunk", type=int, default=0,
+                    help="gradient caching chunk size (0 = off). Same loss and gradients as the full batch, "
+                         "less memory, ~1.3x more compute; for students whose full batch does not fit on the GPU")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--eval-data", nargs="+", default=["refcocog", "sample"])
@@ -257,9 +264,13 @@ def run(args, exp):
             x = x.to(dev, non_blocking=True).float().div_(255)
             t = tok[tcap].to(dev, non_blocking=True)
 
-            with torch.autocast("cuda", dtype=torch.bfloat16):
-                zi = img_enc(x)
-                zt = txt_enc(t)
+            C = args.chunk
+            with torch.autocast("cuda", dtype=torch.bfloat16), torch.set_grad_enabled(not C):
+                zi = torch.cat([img_enc(x[i:i + C]) for i in range(0, len(x), C)]) if C else img_enc(x)
+                zt = torch.cat([txt_enc(t[i:i + C]) for i in range(0, len(t), C)]) if C else txt_enc(t)
+            if C:   # gradient caching: loss on detached embeddings first, then re-forward chunks with their grads
+                zi = zi.float().detach().requires_grad_()
+                zt = zt.float().detach().requires_grad_()
             logits = scale * zi.float() @ zt.float().T
             l_con = 0.5 * (multi_pos_ce(logits, pos) + multi_pos_ce(logits.T, pos.T))
             loss = (1 - args.alpha) * l_con
@@ -272,6 +283,12 @@ def run(args, exp):
                 loss = loss + args.alpha * l_dist
             opt.zero_grad(set_to_none=True)
             loss.backward()
+            if C:
+                for enc, inp, z in ((img_enc, x, zi), (txt_enc, t, zt)):
+                    for i in range(0, len(inp), C):
+                        with torch.autocast("cuda", dtype=torch.bfloat16):
+                            zc = enc(inp[i:i + C])
+                        zc.float().backward(z.grad[i:i + C])
             torch.nn.utils.clip_grad_norm_([p for p in clip.parameters() if p.requires_grad], 1.0)
             opt.step(); sched.step(); step += 1
             run_l["loss"] += loss.item(); run_l["con"] += l_con.item(); run_l["dist"] += l_dist.item()
