@@ -1,0 +1,19 @@
+
+===== 2026-11-17T20:05:50+00:00  .venv/python scripts/train.py --exp ft-b-crosssource --student mobileclip2-b --sources refcoco refcocoplus --title 'Fine-tune MobileCLIP2-B on RefCOCO/RefCOCO+ only (cross-source ablation)' --question 'Does the fine-tuning gain survive when no RefCOCOg-style caption is in the training data (validation folds are RefCOCOg-derived)?'
+[experiment 013_ft-b-crosssource] Fine-tune MobileCLIP2-B on RefCOCO/RefCOCO+ only (cross-source ablation)
+train: 8754 images, 37532 unique captions (5.46/img), data sha 91dd2c2cbf71ee9d
+epoch 0 (pretrained): refcocog=71.38  sample=88.91
+  step 20/170 loss 1.8602 con 1.8602 dist 0.0000 lr 9.99e-06 34s
+epoch 1: loss 2.1151  refcocog=82.43  sample=92.95  (48s)
+  step 40/170 loss 1.6267 con 1.6267 dist 0.0000 lr 9.45e-06 55s
+  step 60/170 loss 1.7462 con 1.7462 dist 0.0000 lr 8.17e-06 73s
+epoch 2: loss 1.6238  refcocog=83.66  sample=92.53  (82s)
+  step 80/170 loss 1.3584 con 1.3584 dist 0.0000 lr 6.37e-06 95s
+  step 100/170 loss 1.4307 con 1.4307 dist 0.0000 lr 4.33e-06 113s
+epoch 3: loss 1.3743  refcocog=84.24  sample=92.93  (116s)
+  step 120/170 loss 1.2127 con 1.2127 dist 0.0000 lr 2.41e-06 134s
+epoch 4: loss 1.2260  refcocog=84.11  sample=92.46  (151s)
+  step 140/170 loss 1.0716 con 1.0716 dist 0.0000 lr 9.19e-07 156s
+  step 160/170 loss 1.2171 con 1.2171 dist 0.0000 lr 1.05e-07 174s
+epoch 5: loss 1.1766  refcocog=84.36  sample=92.01  (185s)
+checkpoint: checkpoints/013_ft-b-crosssource/model.pt

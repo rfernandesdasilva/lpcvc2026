@@ -1,0 +1,137 @@
+{
+  "device": "Samsung Galaxy S22 (Family)",
+  "compile_options": "--target_runtime qnn_dlc --truncate_64bit_io",
+  "datasets": {
+    "image": "d9plzqzd2",
+    "text": "d95pj8jz2"
+  },
+  "rows": [
+    {
+      "model": "mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt",
+      "image": {
+        "ms_median": 14.414,
+        "ms_runs": [
+          14.394,
+          14.47,
+          14.414
+        ],
+        "peak_mem_MiB": 163.65234375,
+        "layers_by_unit": {
+          "NPU": 335
+        },
+        "onnx_MiB": 329.52236461639404,
+        "onnx_sha256": "706a25029caa38e16ca01af5cbd670b94e96c5e3877472d74c012d468ecff1fc",
+        "compile_job": "j5wrr3k4p",
+        "compile_url": "https://workbench.aihub.qualcomm.com/jobs/j5wrr3k4p/",
+        "profile_jobs": [
+          "jgdmmqk6g",
+          "j5788lmnp",
+          "jp422d72g"
+        ],
+        "inference_job": "jpxzz6q85"
+      },
+      "text": {
+        "ms_median": 3.265,
+        "ms_runs": [
+          3.265,
+          3.264,
+          3.265
+        ],
+        "peak_mem_MiB": 157.75,
+        "layers_by_unit": {
+          "NPU": 359
+        },
+        "onnx_MiB": 242.3477020263672,
+        "onnx_sha256": "465298433a56c5a1b2756c4d650974f3c98f2682110d59b5067a9ff9b3e4a47d",
+        "compile_job": "jp1mmw9np",
+        "compile_url": "https://workbench.aihub.qualcomm.com/jobs/jp1mmw9np/",
+        "profile_jobs": [
+          "j5mll677g",
+          "jgnwwm4jg",
+          "jpr772rkg"
+        ],
+        "inference_job": "jp2zz916p"
+      },
+      "total_ms": 17.679,
+      "valid_under_35ms": true,
+      "device_sample": {
+        "frac_R@10": 0.9136904761904762,
+        "frac_R@10_ci95": [
+          0.8547619047619047,
+          0.9634002976190476
+        ],
+        "hit@10": 0.9821428571428571,
+        "hit@1": 0.8214285714285714
+      },
+      "device_sample_per_image": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.8333333333333334,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.6666666666666666,
+        0.8,
+        0.25,
+        0.5,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.6666666666666666,
+        0.75,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.2,
+        1.0,
+        0.7,
+        1.0,
+        1.0,
+        0.8,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "local_sample_frac_R@10": 0.9136904761904762,
+      "fidelity_cos": {
+        "image_mean": 0.9999763628712118,
+        "image_min": 0.9999380276402329,
+        "text_mean": 0.9999959705413366,
+        "text_min": 0.999988694099052
+      },
+      "local_refcocog": [
+        0.8733857142857143,
+        "010_ft-b-contrastive"
+      ]
+    }
+  ]
+}

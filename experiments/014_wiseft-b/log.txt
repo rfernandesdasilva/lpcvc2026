@@ -1,0 +1,37 @@
+
+===== 2026-11-17T20:10:14+00:00  .venv/python scripts/eval_local.py --exp wiseft-b --title 'WiSE-FT weight blending of fine-tuned B' --question 'Does blending fine-tuned and pretrained weights (theta = (1-a) zero-shot + a fine-tuned) beat the fully fine-tuned model, especially on the LPCVC sample?' --no-timing --models 'mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt' 'mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.25' 'mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.5' 'mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.75' mobileclip2-b 'mobileclip2-b#checkpoints/012_distill-b-pecore/model.pt' 'mobileclip2-b#checkpoints/013_ft-b-crosssource/model.pt'
+[experiment 014_wiseft-b] WiSE-FT weight blending of fine-tuned B
+refcocog_val/fold0: 300 images, 691 captions
+refcocog_val/fold1: 300 images, 658 captions
+refcocog_val/fold2: 300 images, 692 captions
+refcocog_val/fold3: 300 images, 698 captions
+refcocog_val/fold4: 300 images, 718 captions
+lpcvc_sample: 56 images, 211 captions
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt refcocog   fracR@10= 87.28 [ 85.9, 88.6] n=1500 folds 86.5-88.3
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt sample     fracR@10= 91.37 [ 85.5, 96.3] n=56
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.25 refcocog   fracR@10= 76.35 [ 74.6, 78.1] n=1500 folds 74.2-79.2
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.25 sample     fracR@10= 90.57 [ 84.7, 95.7] n=56
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.5 refcocog   fracR@10= 81.77 [ 80.2, 83.3] n=1500 folds 80.2-83.4
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.5 sample     fracR@10= 91.35 [ 85.5, 96.4] n=56
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.75 refcocog   fracR@10= 85.65 [ 84.2, 87.1] n=1500 folds 84.4-87.5
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.75 sample     fracR@10= 91.21 [ 85.2, 96.2] n=56
+mobileclip2-b          refcocog   fracR@10= 71.31 [ 69.5, 73.1] n=1500 folds 69.8-73.4
+mobileclip2-b          sample     fracR@10= 89.21 [ 83.2, 94.8] n=56
+mobileclip2-b#checkpoints/012_distill-b-pecore/model.pt refcocog   fracR@10= 81.86 [ 80.2, 83.4] n=1500 folds 80.6-83.4
+mobileclip2-b#checkpoints/012_distill-b-pecore/model.pt sample     fracR@10= 91.88 [ 86.1, 96.7] n=56
+mobileclip2-b#checkpoints/013_ft-b-crosssource/model.pt refcocog   fracR@10= 84.30 [ 82.7, 85.8] n=1500 folds 82.1-86.8
+mobileclip2-b#checkpoints/013_ft-b-crosssource/model.pt sample     fracR@10= 92.01 [ 86.7, 96.7] n=56
+paired deltas vs mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt on refcocog:
+  * mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.25 -10.93 pts  (95% CI -12.5 .. -9.3)
+  * mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.5 -5.51 pts  (95% CI -6.8 .. -4.2)
+  * mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.75 -1.63 pts  (95% CI -2.4 .. -0.8)
+  * mobileclip2-b          -15.96 pts  (95% CI -17.6 .. -14.2)
+  * mobileclip2-b#checkpoints/012_distill-b-pecore/model.pt -5.42 pts  (95% CI -6.7 .. -4.2)
+  * mobileclip2-b#checkpoints/013_ft-b-crosssource/model.pt -2.98 pts  (95% CI -4.0 .. -2.0)
+paired deltas vs mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt on sample:
+    mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.25 -0.80 pts  (95% CI -2.7 .. +1.0)
+    mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.5 -0.01 pts  (95% CI -1.7 .. +1.8)
+    mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.75 -0.16 pts  (95% CI -1.1 .. +0.8)
+  * mobileclip2-b          -2.16 pts  (95% CI -4.2 .. -0.4)
+    mobileclip2-b#checkpoints/012_distill-b-pecore/model.pt +0.51 pts  (95% CI -0.6 .. +1.8)
+    mobileclip2-b#checkpoints/013_ft-b-crosssource/model.pt +0.64 pts  (95% CI -0.7 .. +2.2)

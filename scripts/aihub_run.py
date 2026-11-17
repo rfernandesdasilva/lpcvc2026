@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import sys
 import traceback
 from pathlib import Path
@@ -72,6 +73,11 @@ def local_embeddings(model: str, images: np.ndarray, tokens: np.ndarray) -> tupl
     return a.cpu().numpy(), b.cpu().numpy()
 
 
+def safe_tag(m: str) -> str:
+    """Folder/job-name-safe model tag ('mobileclip2-s0@224' -> 'mobileclip2-s0_224', checkpoint paths flattened)."""
+    return re.sub(r"[^A-Za-z0-9_.-]+", "_", m)
+
+
 def local_refcocog_scores() -> dict[str, float]:
     """Pick up local RefCOCOg-LPCVC scores from the latest local screening experiment, for the summary table."""
     out = {}
@@ -107,7 +113,7 @@ def run(args, exp):
     # 1) export + 2) submit compile jobs (identical ONNX files compile once)
     plan, compile_jobs = {}, {}
     for m in args.models:
-        tag = m.replace("@", "_")
+        tag = safe_tag(m)
         onnx_dir = ROOT / "exported" / tag
         if not all((onnx_dir / f).exists() for f, _ in ENCODERS.values()):
             print(f"exporting {m} ...")
@@ -151,7 +157,7 @@ def run(args, exp):
     # 4) collect, 5) score
     rows, refc = [], local_refcocog_scores()
     for m in args.models:
-        tag = m.replace("@", "_")
+        tag = safe_tag(m)
         row = {"model": m}
         emb = {}
         try:

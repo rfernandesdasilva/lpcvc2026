@@ -11,6 +11,9 @@ Model names:
   mobileclip2-s0|s2|b MobileCLIP2 (open_clip, 'dfndr2b'), reparameterized, resize-in-graph.
 
 Append `@<res>` to change the internal image resolution, e.g. `mobileclip2-s0@224`.
+Append `#<checkpoint>` to load fine-tuned weights (path relative to the repo, written by scripts/train.py), and
+`~<a>` after it to blend them with the pretrained weights (WiSE-FT): theta = (1 - a) * pretrained + a * finetuned.
+  e.g. `mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.5`
 """
 from __future__ import annotations
 
@@ -84,6 +87,30 @@ class TextEncoder(nn.Module):
         return F.normalize(z, dim=-1)
 
 
+ROOT = __import__("pathlib").Path(__file__).resolve().parents[1]
+
+
+def split_ckpt(name: str) -> tuple[str, str | None, float]:
+    """'base@res#path~a' -> ('base@res', 'path', a)."""
+    if "#" not in name:
+        return name, None, 1.0
+    name, ckpt = name.split("#", 1)
+    alpha = 1.0
+    if "~" in ckpt:
+        ckpt, a = ckpt.rsplit("~", 1)
+        alpha = float(a)
+    return name, ckpt, alpha
+
+
+def load_finetuned(clip: nn.Module, ckpt: str, alpha: float = 1.0) -> nn.Module:
+    sd = torch.load(ROOT / ckpt, map_location="cpu", weights_only=True)
+    if alpha != 1.0:
+        zs = clip.state_dict()
+        sd = {k: ((1 - alpha) * zs[k].float() + alpha * v.float()) if v.is_floating_point() else v for k, v in sd.items()}
+    clip.load_state_dict({k: v.float() if v.is_floating_point() else v for k, v in sd.items()})
+    return clip
+
+
 def parse_name(name: str) -> tuple[str, int | None]:
     if "@" in name:
         base, res = name.split("@")
@@ -94,14 +121,19 @@ def parse_name(name: str) -> tuple[str, int | None]:
 def build(name: str, device="cpu") -> tuple[nn.Module, nn.Module]:
     import open_clip
 
+    name, ckpt, alpha = split_ckpt(name)
     base, res = parse_name(name)
     if base in ("clip-b16", "clip-b16-norm"):
         clip = open_clip.create_model("ViT-B-16", pretrained="openai")
+        if ckpt:
+            load_finetuned(clip, ckpt, alpha)
         img = ImageEncoder(clip, res or 224, OPENAI_MEAN, OPENAI_STD, normalize_input=(base == "clip-b16-norm"))
         txt = TextEncoder(clip, zero_pad_after_eot=False)
     elif base in MOBILECLIP2:
         # open_clip's pretrained cfg already carries the right mean/std (0/1 for S0/S2/B, per ml-mobileclip).
         clip = open_clip.create_model(MOBILECLIP2[base], pretrained="dfndr2b")
+        if ckpt:
+            load_finetuned(clip, ckpt, alpha)
         clip.eval()
         clip = reparameterize(clip)
         cfg = clip.visual.preprocess_cfg

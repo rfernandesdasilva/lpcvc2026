@@ -18,6 +18,7 @@ conda create -p ./.venv python=3.11 -y          # or python -m venv .venv
 .venv/python -m pip install -r requirements.txt
 .venv/python -m gdown --folder https://drive.google.com/drive/folders/1tTwrehwLtVtMOTjD5beYDC3lcWIfzS5D -O data/lpcvc_sample
 .venv/python scripts/build_val_set.py              # RefCOCOg-LPCVC validation: 5 folds x 300 images (~250 MB)
+.venv/python scripts/build_train_set.py            # RefCOCO/+/g train, LPCVC-style: 15.9k images, 76k captions (~2.5 GB)
 & .\scripts\configure_aihub.ps1                   # stores your AI Hub token (hidden prompt)
 .venv/python -m pytest -q tests
 ```
@@ -28,6 +29,8 @@ conda create -p ./.venv python=3.11 -y          # or python -m venv .venv
 |---|---|---|
 | Screen models locally | `python scripts/eval_local.py --exp <slug> --title ... --question ... --models clip-b16 mobileclip2-s0` | RTX GPU, PyTorch. RefCOCOg-LPCVC (pooled folds) + sample. |
 | Export + ONNX parity | `python scripts/export_onnx.py --model mobileclip2-s0` | Checks ONNX vs PyTorch on real inputs. |
+| Fine-tune a student | `python scripts/train.py --exp <slug> --student mobileclip2-b [--teacher pe-core-l14-336 --alpha 0.5]` | Writes `checkpoints/NNN_<slug>/model.pt`; last epoch is the result. |
+| Screen teachers | `python scripts/screen_teachers.py --exp <slug> --teachers ... --ensembles a+b` | Zero-shot, large open_clip models (never deployed). |
 | Measure on device | `python scripts/aihub_run.py --exp <slug> --models clip-b16 mobileclip2-s0 --profile-runs 3` | S22, QNN. **The only latency we report.** |
 
 ### Experiments are numbered and self-describing
@@ -39,7 +42,9 @@ order. Rules: commit code before running (the manifest records the commit), use 
 *Conclusions* right after a run, and never delete failed experiments.
 
 Model names (see `lpcvc/models.py`): `clip-b16` (official baseline as shipped), `clip-b16-norm`, `mobileclip2-s0`,
-`mobileclip2-s2`, `mobileclip2-b`; add `@<res>` for a different internal image resolution, e.g. `mobileclip2-s0@192`.
+`mobileclip2-s2`, `mobileclip2-b`, `mobileclip2-s3`, `mobileclip2-s4`; add `@<res>` for a different internal image
+resolution, e.g. `mobileclip2-s0@192`; add `#<checkpoint>` for fine-tuned weights and `~<a>` to blend them with the
+pretrained weights, e.g. `"mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt"`. Every script accepts these names.
 
 ### Ground rules
 - Every encoder takes the **official interface** (image `1x3x224x224` float in [0,1], no normalization; text `1x77`
@@ -57,9 +62,11 @@ Model names (see `lpcvc/models.py`): `clip-b16` (official baseline as shipped), 
 
 ## Layout
 ```
-lpcvc/          data loading (official preprocessing), metrics, model wrappers
-scripts/        build_val_set.py, eval_local.py, export_onnx.py, aihub_run.py
-splits/         committed validation-fold definitions + reserved (never-train) COCO image IDs
+lpcvc/          data loading (official preprocessing), metrics, model wrappers, teachers, experiment registry
+scripts/        build_val_set.py, build_train_set.py, build_calib_set.py, eval_local.py, train.py,
+                screen_teachers.py, export_onnx.py, aihub_run.py, aihub_quantize.py, plot_pareto.py
+splits/         committed validation folds, training/calibration image lists, reserved (never-train) COCO IDs
+checkpoints/    fine-tuned weights (gitignored; share separately)
 tests/          scorer equivalence tests
 experiments/    INDEX.md + one numbered folder per experiment (see above)
 third_party/    lpcvc_sample (official sample solution), ml-mobileclip (submodules, unmodified)
