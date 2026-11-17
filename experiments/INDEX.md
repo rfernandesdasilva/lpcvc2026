@@ -11,4 +11,4 @@ In the order they were run. Each folder has a README (question, how to reproduce
 | [005](005_local-screen-large/README.md) | 2026-11-17 | Local accuracy of the larger MobileCLIP2 models (S3, S4) | ok | best on refcocog: mobileclip2-s3 72.11 | `4ff115d` |
 | [006](006_s22-profile-large/README.md) | 2026-11-17 | S22 latency of the larger MobileCLIP2 models (S3, S4) | ok | best valid by RefCOCOg: mobileclip2-s3 (28.4 ms) | `4ff115d` |
 | [007](007_s22-int8-ptq/README.md) | 2026-11-17 | INT8 post-training quantization of MobileCLIP2-B and S0 on the S22 | failed | failed (zip download bug); quantize jobs reused by 008 | `ed5e0df` |
-| [008](008_s22-int8-ptq-rerun/README.md) | 2026-11-17 | INT8 post-training quantization of MobileCLIP2-B and S0 on the S22 (rerun of 007) | running |  | `f29ec23` |
+| [008](008_s22-int8-ptq-rerun/README.md) | 2026-11-17 | INT8 post-training quantization of MobileCLIP2-B and S0 on the S22 (rerun of 007) | partial | default AI Hub PTQ fails: w8a8 destroys accuracy; most INT8 graphs fail on S22; B img w8a8 only 5% faster | `f29ec23` |

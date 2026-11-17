@@ -160,6 +160,9 @@ def run(args, exp):
                     raise RuntimeError(e["error"])
                 times, mems = [], []
                 for i, pj in enumerate(e["profile_jobs"]):
+                    pj.wait()
+                    if pj.get_status().failure:
+                        raise RuntimeError(f"profile job {pj.job_id} failed on device: {pj.get_status().message}")
                     prof = pj.download_profile()
                     exp.save_json(f"aihub/{tag}/{enc}_profile{i}.json", prof)
                     s = prof["execution_summary"]

@@ -1,0 +1,242 @@
+{
+  "mobileclip2-s0_text_w8a16_inf": {
+    "job_id": "j5wrrerzp",
+    "type": "InferenceJob",
+    "status": "CREATED",
+    "message": ""
+  },
+  "mobileclip2-s0_text_w8a16_profile2": {
+    "job_id": "jp1mm4mnp",
+    "type": "InferenceJob",
+    "status": "MEASURING_PERFORMANCE",
+    "message": ""
+  },
+  "mobileclip2-s0_text_w8a16_profile1": {
+    "job_id": "jg9qqlqmp",
+    "type": "InferenceJob",
+    "status": "PROVISIONING_DEVICE",
+    "message": ""
+  },
+  "mobileclip2-s0_text_w8a16_profile0": {
+    "job_id": "j5wrrer4p",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-s0_image_w8a16_inf": {
+    "job_id": "jgz003045",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Model mqy3vlrlv's producer failed."
+  },
+  "mobileclip2-s0_image_w8a16_profile2": {
+    "job_id": "jpenndn8p",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Model mqy3vlrlv's producer failed."
+  },
+  "mobileclip2-s0_image_w8a16_profile1": {
+    "job_id": "jgj88v815",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Model mqy3vlrlv's producer failed."
+  },
+  "mobileclip2-s0_image_w8a16_profile0": {
+    "job_id": "jpvnn6nzg",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Model mqy3vlrlv's producer failed."
+  },
+  "mobileclip2-s0_text_w8a8_inf": {
+    "job_id": "jgo99291g",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-s0_text_w8a8_profile2": {
+    "job_id": "j5600y0n5",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-s0_text_w8a8_profile1": {
+    "job_id": "jglqqvq2p",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-s0_text_w8a8_profile0": {
+    "job_id": "j5qdd6deg",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-s0_image_w8a8_inf": {
+    "job_id": "jgkkkekvg",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Model mnzv169gx's producer failed."
+  },
+  "mobileclip2-s0_image_w8a8_profile2": {
+    "job_id": "jp8kkqkqp",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Model mnzv169gx's producer failed."
+  },
+  "mobileclip2-s0_image_w8a8_profile1": {
+    "job_id": "jp0xxzx0p",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Model mnzv169gx's producer failed."
+  },
+  "mobileclip2-s0_image_w8a8_profile0": {
+    "job_id": "jpyyy120p",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Model mnzv169gx's producer failed."
+  },
+  "mobileclip2-b_text_w8a16_inf": {
+    "job_id": "jp2zzkd6p",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-b_text_w8a16_profile2": {
+    "job_id": "jpr77vdkg",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-b_text_w8a16_profile1": {
+    "job_id": "jgnww6qjg",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-b_text_w8a16_profile0": {
+    "job_id": "j5mllnk7g",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-b_image_w8a16_inf": {
+    "job_id": "jpxzzkr85",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-b_image_w8a16_profile2": {
+    "job_id": "jp422l42g",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-b_image_w8a16_profile1": {
+    "job_id": "j5788ynnp",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-b_image_w8a16_profile0": {
+    "job_id": "jgdmmx46g",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-b_text_w8a8_inf": {
+    "job_id": "jp1mm41np",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-b_text_w8a8_profile2": {
+    "job_id": "jg9qql2mp",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-b_text_w8a8_profile1": {
+    "job_id": "j5wrrez4p",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-b_text_w8a8_profile0": {
+    "job_id": "jgz003y45",
+    "type": "InferenceJob",
+    "status": "FAILED",
+    "message": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+  },
+  "mobileclip2-b_image_w8a8_inf": {
+    "job_id": "jpenndx8p",
+    "type": "InferenceJob",
+    "status": "SUCCESS",
+    "message": ""
+  },
+  "mobileclip2-b_image_w8a8_profile2": {
+    "job_id": "jgj88vy15",
+    "type": "InferenceJob",
+    "status": "SUCCESS",
+    "message": ""
+  },
+  "mobileclip2-b_image_w8a8_profile1": {
+    "job_id": "jpvnn6mzg",
+    "type": "InferenceJob",
+    "status": "SUCCESS",
+    "message": ""
+  },
+  "mobileclip2-b_image_w8a8_profile0": {
+    "job_id": "jgo992w1g",
+    "type": "InferenceJob",
+    "status": "SUCCESS",
+    "message": ""
+  },
+  "mobileclip2-s0_text_w8a16": {
+    "job_id": "j5wrrey4p",
+    "type": "QuantizeJob",
+    "status": "SUCCESS",
+    "message": ""
+  },
+  "mobileclip2-s0_image_w8a16": {
+    "job_id": "jgz003z45",
+    "type": "QuantizeJob",
+    "status": "SUCCESS",
+    "message": ""
+  },
+  "mobileclip2-s0_text_w8a8": {
+    "job_id": "jpennd68p",
+    "type": "QuantizeJob",
+    "status": "SUCCESS",
+    "message": ""
+  },
+  "mobileclip2-s0_image_w8a8": {
+    "job_id": "jgj88v315",
+    "type": "QuantizeJob",
+    "status": "SUCCESS",
+    "message": ""
+  },
+  "mobileclip2-b_text_w8a16": {
+    "job_id": "jpvnn62zg",
+    "type": "QuantizeJob",
+    "status": "SUCCESS",
+    "message": ""
+  },
+  "mobileclip2-b_image_w8a16": {
+    "job_id": "jgo992d1g",
+    "type": "QuantizeJob",
+    "status": "SUCCESS",
+    "message": ""
+  },
+  "mobileclip2-b_text_w8a8": {
+    "job_id": "jp3rrjomp",
+    "type": "QuantizeJob",
+    "status": "SUCCESS",
+    "message": ""
+  },
+  "mobileclip2-b_image_w8a8": {
+    "job_id": "j5600yon5",
+    "type": "QuantizeJob",
+    "status": "SUCCESS",
+    "message": ""
+  }
+}

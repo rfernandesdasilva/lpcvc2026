@@ -39,5 +39,20 @@
     "numpy": "2.4.6",
     "gpu": "NVIDIA GeForce RTX 4080 SUPER"
   },
-  "status": "running"
+  "status": "partial: quantize jobs ok; 7 of 8 quantized encoders failed to compile or run on the S22",
+  "aihub": {
+    "device": "Samsung Galaxy S22 (Family)",
+    "compile_options": "--target_runtime qnn_dlc --truncate_64bit_io",
+    "sample_datasets": {
+      "image": "d9plzqzd2",
+      "text": "d95pj8jz2"
+    },
+    "calibration_datasets": {
+      "image": "d2ql6x3v9",
+      "text": "d2nl653o9"
+    },
+    "calibration": "data/calib_refcocog_train (splits/calib/), 256 images / 512 captions"
+  },
+  "finished_utc": "2026-11-17T17:58:00+00:00",
+  "headline": "default AI Hub PTQ fails: w8a8 destroys accuracy; most INT8 graphs fail on S22; B img w8a8 only 5% faster"
 }

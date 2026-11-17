@@ -174,7 +174,7 @@ def run(args, exp):
         if "error" in j:
             continue
         target = j["compile_job"].get_target_model()
-        if target is None:
+        if target is None or j["compile_job"].get_status().failure:
             j["error"] = f"compile failed: {j['compile_job'].get_status().message} ({j['compile_job'].url})"
             print(f"!! {m}/{enc}/{p}: {j['error']}")
             continue
@@ -216,6 +216,9 @@ def run(args, exp):
             tag = m.replace("@", "_")
             times, mems = [], []
             for i, pj in enumerate(j["profile_jobs"]):
+                pj.wait()
+                if pj.get_status().failure:
+                    raise RuntimeError(f"profile job {pj.job_id} failed on device: {pj.get_status().message}")
                 prof = pj.download_profile()
                 exp.save_json(f"aihub/{tag}/{p}/{enc}_profile{i}.json", prof)
                 s = prof["execution_summary"]
