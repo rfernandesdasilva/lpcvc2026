@@ -1,0 +1,96 @@
+
+===== 2026-11-17T16:49:41+00:00  .venv/python scripts/aihub_run.py --exp s22-profile-large --title 'S22 latency of the larger MobileCLIP2 models (S3, S4)' --question 'Do MobileCLIP2-S3 and S4 fit the 35 ms S22 budget?' --models mobileclip2-s3 mobileclip2-s4 --profile-runs 3
+[experiment 006_s22-profile-large] S22 latency of the larger MobileCLIP2 models (S3, S4)
+device=Samsung Galaxy S22 (Family)  datasets={'image': 'd9plzqzd2', 'text': 'd95pj8jz2'}
+exporting mobileclip2-s3 ...
+compile mobileclip2-s3/image: https://workbench.aihub.qualcomm.com/jobs/jgdmmx66g/
+compile mobileclip2-s3/text: https://workbench.aihub.qualcomm.com/jobs/j5788yonp/
+exporting mobileclip2-s4 ...
+compile mobileclip2-s4/image: https://workbench.aihub.qualcomm.com/jobs/jgnww6dvg/
+compile mobileclip2-s4/text: https://workbench.aihub.qualcomm.com/jobs/jpyyy1krp/
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+mobileclip2-s3         img 23.068 + txt 5.287 = 28.355 ms VALID | device sample R@10 89.36 (local 89.36) | fidelity img/txt min 0.9998/1.0000
+mobileclip2-s4         img 38.418 + txt 5.277 = 43.695 ms TOO SLOW | device sample R@10 88.76 (local 88.76) | fidelity img/txt min 0.9999/1.0000

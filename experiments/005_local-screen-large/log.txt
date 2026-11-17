@@ -1,0 +1,25 @@
+
+===== 2026-11-17T16:47:52+00:00  .venv/python scripts/eval_local.py --exp local-screen-large --title 'Local accuracy of the larger MobileCLIP2 models (S3, S4)' --question 'How much more accurate are MobileCLIP2-S3 and S4 than B on RefCOCOg-LPCVC, i.e. is it worth spending the remaining ~17 ms of S22 budget on a bigger model?' --models clip-b16 mobileclip2-b mobileclip2-s3 mobileclip2-s4 --data refcocog sample
+[experiment 005_local-screen-large] Local accuracy of the larger MobileCLIP2 models (S3, S4)
+refcocog_val/fold0: 300 images, 691 captions
+refcocog_val/fold1: 300 images, 658 captions
+refcocog_val/fold2: 300 images, 692 captions
+refcocog_val/fold3: 300 images, 698 captions
+refcocog_val/fold4: 300 images, 718 captions
+lpcvc_sample: 56 images, 211 captions
+clip-b16               refcocog   fracR@10= 63.19 [ 61.2, 65.2] n=1500 folds 61.0-67.8  gpu img/txt ms=5.23/5.90
+clip-b16               sample     fracR@10= 87.35 [ 80.6, 93.4] n=56  gpu img/txt ms=5.23/5.90
+mobileclip2-b          refcocog   fracR@10= 71.31 [ 69.5, 73.1] n=1500 folds 69.8-73.4  gpu img/txt ms=4.77/5.52
+mobileclip2-b          sample     fracR@10= 89.21 [ 83.2, 94.8] n=56  gpu img/txt ms=4.77/5.52
+mobileclip2-s3         refcocog   fracR@10= 72.11 [ 70.4, 74.0] n=1500 folds 70.1-75.4  gpu img/txt ms=15.35/5.41
+mobileclip2-s3         sample     fracR@10= 89.36 [ 83.1, 94.9] n=56  gpu img/txt ms=15.35/5.41
+mobileclip2-s4         refcocog   fracR@10= 71.59 [ 69.7, 73.4] n=1500 folds 70.2-73.9  gpu img/txt ms=16.68/5.08
+mobileclip2-s4         sample     fracR@10= 88.76 [ 82.6, 94.5] n=56  gpu img/txt ms=16.68/5.08
+paired deltas vs clip-b16 on refcocog:
+  * mobileclip2-b          +8.12 pts  (95% CI +6.6 .. +9.7)
+  * mobileclip2-s3         +8.92 pts  (95% CI +7.4 .. +10.5)
+  * mobileclip2-s4         +8.40 pts  (95% CI +6.9 .. +10.1)
+paired deltas vs clip-b16 on sample:
+    mobileclip2-b          +1.86 pts  (95% CI -0.3 .. +4.2)
+    mobileclip2-s3         +2.01 pts  (95% CI -0.1 .. +4.3)
+    mobileclip2-s4         +1.41 pts  (95% CI -0.8 .. +3.9)

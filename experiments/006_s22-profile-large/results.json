@@ -1,0 +1,264 @@
+{
+  "device": "Samsung Galaxy S22 (Family)",
+  "compile_options": "--target_runtime qnn_dlc --truncate_64bit_io",
+  "datasets": {
+    "image": "d9plzqzd2",
+    "text": "d95pj8jz2"
+  },
+  "rows": [
+    {
+      "model": "mobileclip2-s3",
+      "image": {
+        "ms_median": 23.068,
+        "ms_runs": [
+          22.968,
+          23.068,
+          23.145
+        ],
+        "peak_mem_MiB": 353.83203125,
+        "layers_by_unit": {
+          "NPU": 461
+        },
+        "onnx_MiB": 477.3311290740967,
+        "onnx_sha256": "9ed2ccc24b1b9faa5a9c5875f7a3ffa95de282f5897ebd940883706c4511b65f",
+        "compile_job": "jgdmmx66g",
+        "compile_url": "https://workbench.aihub.qualcomm.com/jobs/jgdmmx66g/",
+        "profile_jobs": [
+          "jp0xxz82p",
+          "jp8kkqdzp",
+          "jgkkkewyg"
+        ],
+        "inference_job": "j5qdd6x7g"
+      },
+      "text": {
+        "ms_median": 5.287,
+        "ms_runs": [
+          5.297,
+          5.287,
+          5.285
+        ],
+        "peak_mem_MiB": 96.6953125,
+        "layers_by_unit": {
+          "NPU": 335
+        },
+        "onnx_MiB": 471.80182933807373,
+        "onnx_sha256": "10cad8ba8fdea80b6fc7fe1e9568ae69efea2556618d163219394c1be982de9d",
+        "compile_job": "j5788yonp",
+        "compile_url": "https://workbench.aihub.qualcomm.com/jobs/j5788yonp/",
+        "profile_jobs": [
+          "jglqqv9ep",
+          "j5600y9v5",
+          "jp3rrjlxp"
+        ],
+        "inference_job": "jgo99274g"
+      },
+      "total_ms": 28.355,
+      "valid_under_35ms": true,
+      "device_sample": {
+        "frac_R@10": 0.8936011904761905,
+        "frac_R@10_ci95": [
+          0.8309449404761904,
+          0.9491071428571429
+        ],
+        "hit@10": 0.9642857142857143,
+        "hit@1": 0.8214285714285714
+      },
+      "device_sample_per_image": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.6666666666666666,
+        0.8,
+        0.375,
+        0.5,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.75,
+        1.0,
+        1.0,
+        1.0,
+        0.6666666666666666,
+        1.0,
+        1.0,
+        1.0,
+        0.3333333333333333,
+        0.75,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.6,
+        1.0,
+        1.0,
+        0.6,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "local_sample_frac_R@10": 0.8936011904761905,
+      "fidelity_cos": {
+        "image_mean": 0.9999000764828879,
+        "image_min": 0.999828494534441,
+        "text_mean": 0.9999980367458415,
+        "text_min": 0.9999942913556938
+      },
+      "local_refcocog": [
+        0.7210722222222223,
+        "005_local-screen-large"
+      ]
+    },
+    {
+      "model": "mobileclip2-s4",
+      "image": {
+        "ms_median": 38.418,
+        "ms_runs": [
+          38.321,
+          38.418,
+          38.666
+        ],
+        "peak_mem_MiB": 262.390625,
+        "layers_by_unit": {
+          "NPU": 523
+        },
+        "onnx_MiB": 1226.8944692611694,
+        "onnx_sha256": "7d72b5153cdfa529c477cdd8468fb59239a1e9046dc89c46cc687fa7926ecf24",
+        "compile_job": "jgnww6dvg",
+        "compile_url": "https://workbench.aihub.qualcomm.com/jobs/jgnww6dvg/",
+        "profile_jobs": [
+          "jpvnn6y7g",
+          "jgj88v675",
+          "jpennd07p"
+        ],
+        "inference_job": "jgz003qz5"
+      },
+      "text": {
+        "ms_median": 5.277,
+        "ms_runs": [
+          5.277,
+          5.314,
+          5.271
+        ],
+        "peak_mem_MiB": 161.22265625,
+        "layers_by_unit": {
+          "NPU": 335
+        },
+        "onnx_MiB": 471.80182933807373,
+        "onnx_sha256": "4f0d0a1e4871a0be1fbcc553767616fc1efdeb0a74af7aa6544422b06f52d5fd",
+        "compile_job": "jpyyy1krp",
+        "compile_url": "https://workbench.aihub.qualcomm.com/jobs/jpyyy1krp/",
+        "profile_jobs": [
+          "j5wrre0zp",
+          "jg9qql7qp",
+          "jp1mm4kkp"
+        ],
+        "inference_job": "jgdmmxykg"
+      },
+      "total_ms": 43.695,
+      "valid_under_35ms": false,
+      "device_sample": {
+        "frac_R@10": 0.8876488095238094,
+        "frac_R@10_ci95": [
+          0.8261867559523809,
+          0.9446502976190476
+        ],
+        "hit@10": 0.9642857142857143,
+        "hit@1": 0.8214285714285714
+      },
+      "device_sample_per_image": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.8333333333333334,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.6666666666666666,
+        0.8,
+        0.375,
+        0.5,
+        1.0,
+        0.75,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.75,
+        1.0,
+        1.0,
+        1.0,
+        0.6666666666666666,
+        1.0,
+        1.0,
+        1.0,
+        0.6666666666666666,
+        0.5,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.6,
+        1.0,
+        1.0,
+        0.6,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "local_sample_frac_R@10": 0.8876488095238094,
+      "fidelity_cos": {
+        "image_mean": 0.9999714223606114,
+        "image_min": 0.999866275215158,
+        "text_mean": 0.9999981490095281,
+        "text_min": 0.9999938543798508
+      },
+      "local_refcocog": [
+        0.7159269841269841,
+        "005_local-screen-large"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+
+===== 2026-11-17T16:49:58+00:00  .venv/python scripts/aihub_quantize.py --exp s22-int8-ptq --title 'INT8 post-training quantization of MobileCLIP2-B and S0 on the S22' --question 'How much S22 latency do w8a8 and w8a16 PTQ save for B (accuracy entry) and S0 (speed entry), what do they cost in RefCOCOg-LPCVC accuracy, and which image/text precision combination is best?' --models mobileclip2-b mobileclip2-s0 --precisions w8a8 w8a16 --profile-runs 3
+[experiment 007_s22-int8-ptq] INT8 post-training quantization of MobileCLIP2-B and S0 on the S22
+uploading calibration data (256 images, 512 captions) ...
+quantize mobileclip2-b/image/w8a8: https://workbench.aihub.qualcomm.com/jobs/j5600yon5/
+quantize mobileclip2-b/text/w8a8: https://workbench.aihub.qualcomm.com/jobs/jp3rrjomp/
+quantize mobileclip2-b/image/w8a16: https://workbench.aihub.qualcomm.com/jobs/jgo992d1g/
+quantize mobileclip2-b/text/w8a16: https://workbench.aihub.qualcomm.com/jobs/jpvnn62zg/
+quantize mobileclip2-s0/image/w8a8: https://workbench.aihub.qualcomm.com/jobs/jgj88v315/
+quantize mobileclip2-s0/text/w8a8: https://workbench.aihub.qualcomm.com/jobs/jpennd68p/
+quantize mobileclip2-s0/image/w8a16: https://workbench.aihub.qualcomm.com/jobs/jgz003z45/
+quantize mobileclip2-s0/text/w8a16: https://workbench.aihub.qualcomm.com/jobs/j5wrrey4p/
+Downloaded model to C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-b\w8a8\image_encoder.onnx.onnx.zip
+!! mobileclip2-b/image/w8a8: FileNotFoundError: no .onnx in downloaded C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-b\w8a8\image_encoder.onnx.onnx.zip
+Downloaded model to C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-b\w8a8\text_encoder.onnx.onnx.zip
+!! mobileclip2-b/text/w8a8: FileNotFoundError: no .onnx in downloaded C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-b\w8a8\text_encoder.onnx.onnx.zip
+Downloaded model to C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-b\w8a16\image_encoder.onnx.onnx.zip
+!! mobileclip2-b/image/w8a16: FileNotFoundError: no .onnx in downloaded C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-b\w8a16\image_encoder.onnx.onnx.zip
+Downloaded model to C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-b\w8a16\text_encoder.onnx.onnx.zip
+!! mobileclip2-b/text/w8a16: FileNotFoundError: no .onnx in downloaded C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-b\w8a16\text_encoder.onnx.onnx.zip
+Downloaded model to C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-s0\w8a8\image_encoder.onnx.onnx.zip
+!! mobileclip2-s0/image/w8a8: FileNotFoundError: no .onnx in downloaded C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-s0\w8a8\image_encoder.onnx.onnx.zip
+Downloaded model to C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-s0\w8a8\text_encoder.onnx.onnx.zip
+!! mobileclip2-s0/text/w8a8: FileNotFoundError: no .onnx in downloaded C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-s0\w8a8\text_encoder.onnx.onnx.zip
+Downloaded model to C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-s0\w8a16\image_encoder.onnx.onnx.zip
+!! mobileclip2-s0/image/w8a16: FileNotFoundError: no .onnx in downloaded C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-s0\w8a16\image_encoder.onnx.onnx.zip
+Downloaded model to C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-s0\w8a16\text_encoder.onnx.onnx.zip
+!! mobileclip2-s0/text/w8a16: FileNotFoundError: no .onnx in downloaded C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-s0\w8a16\text_encoder.onnx.onnx.zip
+local embeddings done for mobileclip2-b
+local embeddings done for mobileclip2-s0
