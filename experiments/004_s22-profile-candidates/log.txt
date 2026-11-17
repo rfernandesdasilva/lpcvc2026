@@ -1,0 +1,259 @@
+
+===== 2026-11-17T15:14:20+00:00  .venv/python scripts/aihub_run.py --exp s22-profile-candidates --title 'S22 latency and on-device accuracy of all candidate models' --question 'Which candidate models fit the 35 ms S22 budget, what does each cost in latency, and does lowering S0'"'"'s resolution actually save time on the NPU?' --models clip-b16 clip-b16-norm mobileclip2-s0 mobileclip2-s0@224 mobileclip2-s0@192 mobileclip2-s2 mobileclip2-b --profile-runs 3
+[experiment 004_s22-profile-candidates] S22 latency and on-device accuracy of all candidate models
+device=Samsung Galaxy S22 (Family)  datasets={'image': 'd9plzqzd2', 'text': 'd95pj8jz2'}
+exporting clip-b16 ...
+compile clip-b16/image: https://workbench.aihub.qualcomm.com/jobs/jp8kkynzp/
+compile clip-b16/text: https://workbench.aihub.qualcomm.com/jobs/j5788rmqp/
+exporting clip-b16-norm ...
+compile clip-b16-norm/image: https://workbench.aihub.qualcomm.com/jobs/jpyyy39rp/
+compile mobileclip2-s0/image: https://workbench.aihub.qualcomm.com/jobs/jp0xx0n2p/
+compile mobileclip2-s0/text: https://workbench.aihub.qualcomm.com/jobs/jp8kkylzp/
+exporting mobileclip2-s0@224 ...
+compile mobileclip2-s0_224/image: https://workbench.aihub.qualcomm.com/jobs/jgkkkxjyg/
+exporting mobileclip2-s0@192 ...
+compile mobileclip2-s0_192/image: https://workbench.aihub.qualcomm.com/jobs/jp3rr0yxp/
+exporting mobileclip2-s2 ...
+compile mobileclip2-s2/image: https://workbench.aihub.qualcomm.com/jobs/jgo996j4g/
+compile mobileclip2-s2/text: https://workbench.aihub.qualcomm.com/jobs/jgdmm1jkg/
+exporting mobileclip2-b ...
+compile mobileclip2-b/image: https://workbench.aihub.qualcomm.com/jobs/jgkkkxzog/
+compile mobileclip2-b/text: https://workbench.aihub.qualcomm.com/jobs/jgj88nx85/
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+clip-b16               img 12.714 + txt 3.114 = 15.828 ms VALID | device sample R@10 87.35 (local 87.35) | fidelity img/txt min 0.9999/1.0000
+clip-b16-norm          img 12.824 + txt 3.114 = 15.938 ms VALID | device sample R@10 88.85 (local 88.85) | fidelity img/txt min 1.0000/1.0000
+mobileclip2-s0         img 6.838 + txt 3.223 = 10.061 ms VALID | device sample R@10 89.30 (local 88.85) | fidelity img/txt min 0.9998/1.0000
+mobileclip2-s0@224     img 5.733 + txt 3.223 = 8.956 ms VALID | device sample R@10 88.82 (local 88.82) | fidelity img/txt min 0.9998/1.0000
+mobileclip2-s0@192     img 4.721 + txt 3.223 = 7.944 ms VALID | device sample R@10 89.00 (local 89.00) | fidelity img/txt min 0.9998/1.0000
+mobileclip2-s2         img 15.019 + txt 3.243 = 18.262 ms VALID | device sample R@10 89.45 (local 89.45) | fidelity img/txt min 0.9998/1.0000
+mobileclip2-b          img 14.431 + txt 3.265 = 17.696 ms VALID | device sample R@10 88.85 (local 89.21) | fidelity img/txt min 1.0000/1.0000
