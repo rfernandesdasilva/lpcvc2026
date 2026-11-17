@@ -19,6 +19,7 @@ conda create -p ./.venv python=3.11 -y          # or python -m venv .venv
 .venv/python -m gdown --folder https://drive.google.com/drive/folders/1tTwrehwLtVtMOTjD5beYDC3lcWIfzS5D -O data/lpcvc_sample
 .venv/python scripts/build_val_set.py              # RefCOCOg-LPCVC validation: 5 folds x 300 images (~250 MB)
 .venv/python scripts/build_train_set.py            # RefCOCO/+/g train, LPCVC-style: 15.9k images, 76k captions (~2.5 GB)
+.venv/python scripts/fetch_checkpoints.py 010 015 017   # fine-tuned B/S0/S3 from the team Drive folder (SHA-256 checked)
 & .\scripts\configure_aihub.ps1                   # stores your AI Hub token (hidden prompt)
 .venv/python -m pytest -q tests
 ```
@@ -66,7 +67,7 @@ lpcvc/          data loading (official preprocessing), metrics, model wrappers, 
 scripts/        build_val_set.py, build_train_set.py, build_calib_set.py, eval_local.py, train.py,
                 screen_teachers.py, export_onnx.py, aihub_run.py, aihub_quantize.py, plot_pareto.py
 splits/         committed validation folds, training/calibration image lists, reserved (never-train) COCO IDs
-checkpoints/    fine-tuned weights (gitignored; share separately)
+checkpoints/    fine-tuned weights (gitignored; scripts/fetch_checkpoints.py downloads them from Drive)
 tests/          scorer equivalence tests
 experiments/    INDEX.md + one numbered folder per experiment (see above)
 third_party/    lpcvc_sample (official sample solution), ml-mobileclip (submodules, unmodified)
