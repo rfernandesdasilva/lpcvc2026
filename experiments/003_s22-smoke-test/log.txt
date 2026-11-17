@@ -1,0 +1,22 @@
+
+===== 2026-11-17T15:06:13+00:00  python.exe scripts/aihub_run.py --exp s22-smoke-test --title AI Hub pipeline smoke test on the S22 --question Does the compile -> profile -> inference -> score pipeline work end to end on the Galaxy S22 with QNN? --models mobileclip2-s0 --profile-runs 1
+[experiment 003_s22-smoke-test] AI Hub pipeline smoke test on the S22
+uploading lpcvc_sample to AI Hub ...
+device=Samsung Galaxy S22 (Family)  datasets={'image': 'd9plzqzd2', 'text': 'd95pj8jz2'}
+compile mobileclip2-s0/image: https://workbench.aihub.qualcomm.com/jobs/jp8kkyxqp/
+compile mobileclip2-s0/text: https://workbench.aihub.qualcomm.com/jobs/jp0xx0m0p/
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+mobileclip2-s0         img 6.844 + txt 3.217 = 10.061 ms VALID | device sample R@10 89.30 (local 88.85) | fidelity img/txt min 0.9998/1.0000

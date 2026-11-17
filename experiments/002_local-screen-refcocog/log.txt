@@ -1,0 +1,74 @@
+
+===== 2026-11-17T15:04:25+00:00  python.exe scripts/eval_local.py --exp local-screen-refcocog --title Model screen on the RefCOCOg-LPCVC validation set (5x300) --question Which models and resolutions are significantly better than the baseline once we have 1,500 validation queries? --models clip-b16 clip-b16-norm mobileclip2-s0 mobileclip2-s0@224 mobileclip2-s0@192 mobileclip2-s2 mobileclip2-b --data refcocog sample
+[experiment 002_local-screen-refcocog] Model screen on the RefCOCOg-LPCVC validation set (5x300)
+refcocog_val/fold0: 300 images, 691 captions
+refcocog_val/fold1: 300 images, 658 captions
+refcocog_val/fold2: 300 images, 692 captions
+refcocog_val/fold3: 300 images, 698 captions
+refcocog_val/fold4: 300 images, 718 captions
+lpcvc_sample: 56 images, 211 captions
+clip-b16               refcocog   fracR@10= 63.19 [ 61.2, 65.2] n=1500 folds 61.0-67.8  gpu img/txt ms=4.36/4.87
+clip-b16               sample     fracR@10= 87.35 [ 80.6, 93.4] n=56  gpu img/txt ms=4.36/4.87
+clip-b16-norm          refcocog   fracR@10= 64.72 [ 62.7, 66.8] n=1500 folds 63.3-68.2  gpu img/txt ms=4.38/4.87
+clip-b16-norm          sample     fracR@10= 88.85 [ 82.2, 94.7] n=56  gpu img/txt ms=4.38/4.87
+mobileclip2-s0         refcocog   fracR@10= 69.17 [ 67.3, 71.0] n=1500 folds 68.0-72.4  gpu img/txt ms=6.78/4.40
+mobileclip2-s0         sample     fracR@10= 88.85 [ 82.6, 94.5] n=56  gpu img/txt ms=6.78/4.40
+mobileclip2-s0@224     refcocog   fracR@10= 68.69 [ 66.7, 70.6] n=1500 folds 67.1-72.2  gpu img/txt ms=7.06/4.50
+mobileclip2-s0@224     sample     fracR@10= 88.82 [ 82.5, 94.6] n=56  gpu img/txt ms=7.06/4.50
+mobileclip2-s0@192     refcocog   fracR@10= 66.58 [ 64.6, 68.5] n=1500 folds 65.2-70.2  gpu img/txt ms=6.89/4.44
+mobileclip2-s0@192     sample     fracR@10= 89.00 [ 82.8, 94.6] n=56  gpu img/txt ms=6.89/4.44
+mobileclip2-s2         refcocog   fracR@10= 71.15 [ 69.4, 73.0] n=1500 folds 69.9-74.6  gpu img/txt ms=14.02/4.69
+mobileclip2-s2         sample     fracR@10= 89.45 [ 83.7, 94.8] n=56  gpu img/txt ms=14.02/4.69
+mobileclip2-b          refcocog   fracR@10= 71.31 [ 69.5, 73.1] n=1500 folds 69.8-73.4  gpu img/txt ms=4.13/5.17
+mobileclip2-b          sample     fracR@10= 89.21 [ 83.2, 94.8] n=56  gpu img/txt ms=4.13/5.17
+paired deltas vs clip-b16 on refcocog:
+  * clip-b16-norm          +1.53 pts  (95% CI +0.5 .. +2.6)
+  * mobileclip2-s0         +5.98 pts  (95% CI +4.4 .. +7.6)
+  * mobileclip2-s0@224     +5.50 pts  (95% CI +3.8 .. +7.1)
+  * mobileclip2-s0@192     +3.39 pts  (95% CI +1.6 .. +5.1)
+  * mobileclip2-s2         +7.96 pts  (95% CI +6.4 .. +9.6)
+  * mobileclip2-b          +8.12 pts  (95% CI +6.6 .. +9.7)
+paired deltas vs clip-b16 on sample:
+    clip-b16-norm          +1.50 pts  (95% CI -0.2 .. +3.5)
+    mobileclip2-s0         +1.50 pts  (95% CI -1.1 .. +4.0)
+    mobileclip2-s0@224     +1.47 pts  (95% CI -1.5 .. +4.4)
+    mobileclip2-s0@192     +1.65 pts  (95% CI -1.3 .. +4.6)
+    mobileclip2-s2         +2.10 pts  (95% CI -0.2 .. +4.6)
+    mobileclip2-b          +1.86 pts  (95% CI -0.3 .. +4.2)
+
+===== 2026-11-17T15:06:50+00:00  .venv/python scripts/eval_local.py --exp local-screen-refcocog --title 'Model screen on the RefCOCOg-LPCVC validation set (5x300)' --question 'Which models and resolutions are significantly better than the baseline once we have 1,500 validation queries?' --models clip-b16 clip-b16-norm mobileclip2-s0 mobileclip2-s0@224 mobileclip2-s0@192 mobileclip2-s2 mobileclip2-b --data refcocog sample
+[experiment 002_local-screen-refcocog] Model screen on the RefCOCOg-LPCVC validation set (5x300)
+refcocog_val/fold0: 300 images, 691 captions
+refcocog_val/fold1: 300 images, 658 captions
+refcocog_val/fold2: 300 images, 692 captions
+refcocog_val/fold3: 300 images, 698 captions
+refcocog_val/fold4: 300 images, 718 captions
+lpcvc_sample: 56 images, 211 captions
+clip-b16               refcocog   fracR@10= 63.19 [ 61.2, 65.2] n=1500 folds 61.0-67.8  gpu img/txt ms=4.38/4.88
+clip-b16               sample     fracR@10= 87.35 [ 80.6, 93.4] n=56  gpu img/txt ms=4.38/4.88
+clip-b16-norm          refcocog   fracR@10= 64.72 [ 62.7, 66.8] n=1500 folds 63.3-68.2  gpu img/txt ms=4.40/4.87
+clip-b16-norm          sample     fracR@10= 88.85 [ 82.2, 94.7] n=56  gpu img/txt ms=4.40/4.87
+mobileclip2-s0         refcocog   fracR@10= 69.17 [ 67.3, 71.0] n=1500 folds 68.0-72.4  gpu img/txt ms=6.81/4.54
+mobileclip2-s0         sample     fracR@10= 88.85 [ 82.6, 94.5] n=56  gpu img/txt ms=6.81/4.54
+mobileclip2-s0@224     refcocog   fracR@10= 68.69 [ 66.7, 70.6] n=1500 folds 67.1-72.2  gpu img/txt ms=7.21/4.89
+mobileclip2-s0@224     sample     fracR@10= 88.82 [ 82.5, 94.6] n=56  gpu img/txt ms=7.21/4.89
+mobileclip2-s0@192     refcocog   fracR@10= 66.58 [ 64.6, 68.5] n=1500 folds 65.2-70.2  gpu img/txt ms=7.38/4.65
+mobileclip2-s0@192     sample     fracR@10= 89.00 [ 82.8, 94.6] n=56  gpu img/txt ms=7.38/4.65
+mobileclip2-s2         refcocog   fracR@10= 71.15 [ 69.4, 73.0] n=1500 folds 69.9-74.6  gpu img/txt ms=14.77/4.49
+mobileclip2-s2         sample     fracR@10= 89.45 [ 83.7, 94.8] n=56  gpu img/txt ms=14.77/4.49
+mobileclip2-b          refcocog   fracR@10= 71.31 [ 69.5, 73.1] n=1500 folds 69.8-73.4  gpu img/txt ms=5.65/5.11
+mobileclip2-b          sample     fracR@10= 89.21 [ 83.2, 94.8] n=56  gpu img/txt ms=5.65/5.11
+paired deltas vs clip-b16 on refcocog:
+  * clip-b16-norm          +1.53 pts  (95% CI +0.5 .. +2.6)
+  * mobileclip2-s0         +5.98 pts  (95% CI +4.4 .. +7.6)
+  * mobileclip2-s0@224     +5.50 pts  (95% CI +3.8 .. +7.1)
+  * mobileclip2-s0@192     +3.39 pts  (95% CI +1.6 .. +5.1)
+  * mobileclip2-s2         +7.96 pts  (95% CI +6.4 .. +9.6)
+  * mobileclip2-b          +8.12 pts  (95% CI +6.6 .. +9.7)
+paired deltas vs clip-b16 on sample:
+    clip-b16-norm          +1.50 pts  (95% CI -0.2 .. +3.5)
+    mobileclip2-s0         +1.50 pts  (95% CI -1.1 .. +4.0)
+    mobileclip2-s0@224     +1.47 pts  (95% CI -1.5 .. +4.4)
+    mobileclip2-s0@192     +1.65 pts  (95% CI -1.3 .. +4.6)
+    mobileclip2-s2         +2.10 pts  (95% CI -0.2 .. +4.6)
+    mobileclip2-b          +1.86 pts  (95% CI -0.3 .. +4.2)

@@ -17,6 +17,7 @@ import io
 import json
 import platform
 import re
+import shlex
 import subprocess
 import sys
 import traceback
@@ -113,7 +114,7 @@ class Experiment:
         self.dir.mkdir(parents=True, exist_ok=True)
         self.manifest = {
             "id": self.id, "slug": self.dir.name[4:], "title": self.title, "question": self.question,
-            "command": " ".join([Path(sys.executable).name, *sys.argv]),
+            "command": shlex.join([".venv/python", Path(sys.argv[0]).resolve().relative_to(ROOT).as_posix(), *sys.argv[1:]]),
             "git_commit": _git("rev-parse", "HEAD"), "git_dirty": bool(_git("status", "--porcelain", "--", "lpcvc", "scripts")),
             "started_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "args": self.args, "env": _versions(), "status": "running",
@@ -153,7 +154,7 @@ class Experiment:
             "",
             "**Reproduce:**",
             "```bash",
-            m["command"].replace("python.exe", ".venv/python"),
+            m["command"],
             "```",
             "",
             *(f"{t}\n" for t in self.tables),

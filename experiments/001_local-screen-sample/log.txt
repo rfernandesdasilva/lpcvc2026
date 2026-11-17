@@ -1,0 +1,32 @@
+
+===== 2026-11-17T15:03:48+00:00  python.exe scripts/eval_local.py --exp local-screen-sample --title Baseline reproduction and compact-model screen on the LPCVC sample --question Does the official CLIP baseline reproduce locally, and do MobileCLIP2 models beat it on the 56-image LPCVC sample? --models clip-b16 clip-b16-norm mobileclip2-s0 mobileclip2-s0@224 mobileclip2-s2 mobileclip2-b --data sample
+[experiment 001_local-screen-sample] Baseline reproduction and compact-model screen on the LPCVC sample
+lpcvc_sample: 56 images, 211 captions
+clip-b16               sample     fracR@10= 87.35 [ 80.6, 93.4] n=56  gpu img/txt ms=4.39/4.97
+clip-b16-norm          sample     fracR@10= 88.85 [ 82.2, 94.7] n=56  gpu img/txt ms=4.44/4.88
+mobileclip2-s0         sample     fracR@10= 88.85 [ 82.6, 94.5] n=56  gpu img/txt ms=6.80/4.54
+mobileclip2-s0@224     sample     fracR@10= 88.82 [ 82.5, 94.6] n=56  gpu img/txt ms=7.04/4.48
+mobileclip2-s2         sample     fracR@10= 89.45 [ 83.7, 94.8] n=56  gpu img/txt ms=14.54/4.59
+mobileclip2-b          sample     fracR@10= 89.21 [ 83.2, 94.8] n=56  gpu img/txt ms=4.07/5.07
+paired deltas vs clip-b16 on sample:
+    clip-b16-norm          +1.50 pts  (95% CI -0.2 .. +3.5)
+    mobileclip2-s0         +1.50 pts  (95% CI -1.1 .. +4.0)
+    mobileclip2-s0@224     +1.47 pts  (95% CI -1.5 .. +4.4)
+    mobileclip2-s2         +2.10 pts  (95% CI -0.2 .. +4.6)
+    mobileclip2-b          +1.86 pts  (95% CI -0.3 .. +4.2)
+
+===== 2026-11-17T15:06:13+00:00  python.exe scripts/eval_local.py --exp local-screen-sample --title Baseline reproduction and compact-model screen on the LPCVC sample --question Does the official CLIP baseline reproduce locally, and do MobileCLIP2 models beat it on the 56-image LPCVC sample? --models clip-b16 clip-b16-norm mobileclip2-s0 mobileclip2-s0@224 mobileclip2-s2 mobileclip2-b --data sample
+[experiment 001_local-screen-sample] Baseline reproduction and compact-model screen on the LPCVC sample
+lpcvc_sample: 56 images, 211 captions
+clip-b16               sample     fracR@10= 87.35 [ 80.6, 93.4] n=56  gpu img/txt ms=4.50/5.05
+clip-b16-norm          sample     fracR@10= 88.85 [ 82.2, 94.7] n=56  gpu img/txt ms=4.60/4.94
+mobileclip2-s0         sample     fracR@10= 88.85 [ 82.6, 94.5] n=56  gpu img/txt ms=6.64/4.52
+mobileclip2-s0@224     sample     fracR@10= 88.82 [ 82.5, 94.6] n=56  gpu img/txt ms=6.77/4.47
+mobileclip2-s2         sample     fracR@10= 89.45 [ 83.7, 94.8] n=56  gpu img/txt ms=15.60/4.94
+mobileclip2-b          sample     fracR@10= 89.21 [ 83.2, 94.8] n=56  gpu img/txt ms=4.01/4.97
+paired deltas vs clip-b16 on sample:
+    clip-b16-norm          +1.50 pts  (95% CI -0.2 .. +3.5)
+    mobileclip2-s0         +1.50 pts  (95% CI -1.1 .. +4.0)
+    mobileclip2-s0@224     +1.47 pts  (95% CI -1.5 .. +4.4)
+    mobileclip2-s2         +2.10 pts  (95% CI -0.2 .. +4.6)
+    mobileclip2-b          +1.86 pts  (95% CI -0.3 .. +4.2)
