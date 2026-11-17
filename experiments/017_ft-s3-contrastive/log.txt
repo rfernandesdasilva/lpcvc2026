@@ -1,0 +1,26 @@
+
+===== 2026-11-17T21:22:06+00:00  .venv/python scripts/train.py --exp ft-s3-contrastive --student mobileclip2-s3 --chunk 64 --title 'Fine-tune MobileCLIP2-S3, contrastive (same recipe as 010)' --question 'Does the larger S3 (28.4 ms on S22) beat fine-tuned B (87.34) when trained with the same recipe?'
+[experiment 017_ft-s3-contrastive] Fine-tune MobileCLIP2-S3, contrastive (same recipe as 010)
+train: 15905 images, 65306 unique captions (4.81/img), data sha 2933cfea0ab799ee
+epoch 0 (pretrained): refcocog=72.08  sample=89.36
+  step 20/310 loss 1.6589 con 1.6589 dist 0.0000 lr 6.77e-06 242s
+  step 40/310 loss 1.3995 con 1.3995 dist 0.0000 lr 9.97e-06 440s
+  step 60/310 loss 1.5232 con 1.5232 dist 0.0000 lr 9.74e-06 606s
+epoch 1: loss 1.7242  refcocog=84.72  sample=92.75  (620s)
+  step 80/310 loss 1.2300 con 1.2300 dist 0.0000 lr 9.26e-06 703s
+  step 100/310 loss 1.2635 con 1.2635 dist 0.0000 lr 8.57e-06 770s
+  step 120/310 loss 1.1885 con 1.1885 dist 0.0000 lr 7.69e-06 835s
+epoch 2: loss 1.2801  refcocog=86.63  sample=92.98  (853s)
+  step 140/310 loss 1.0179 con 1.0179 dist 0.0000 lr 6.68e-06 907s
+  step 160/310 loss 1.1893 con 1.1893 dist 0.0000 lr 5.59e-06 972s
+  step 180/310 loss 1.0894 con 1.0894 dist 0.0000 lr 4.47e-06 1037s
+epoch 3: loss 1.0774  refcocog=87.83  sample=92.93  (1061s)
+  step 200/310 loss 0.9208 con 0.9208 dist 0.0000 lr 3.37e-06 1109s
+  step 220/310 loss 0.9732 con 0.9732 dist 0.0000 lr 2.36e-06 1175s
+  step 240/310 loss 0.8561 con 0.8561 dist 0.0000 lr 1.47e-06 1243s
+epoch 4: loss 0.9616  refcocog=87.87  sample=93.15  (1274s)
+  step 260/310 loss 0.8707 con 0.8707 dist 0.0000 lr 7.72e-07 1317s
+  step 280/310 loss 0.9456 con 0.9456 dist 0.0000 lr 2.83e-07 1384s
+  step 300/310 loss 0.8468 con 0.8468 dist 0.0000 lr 3.17e-08 1452s
+epoch 5: loss 0.9049  refcocog=87.95  sample=92.86  (1491s)
+checkpoint: checkpoints/017_ft-s3-contrastive/model.pt

@@ -1,0 +1,25 @@
+
+===== 2026-11-17T21:48:33+00:00  .venv/python scripts/eval_local.py --exp compare-finetuned --title 'Fine-tuned students head to head (FP32)' --question 'How do the fine-tuned B, S3 and S0 compare, paired, in FP32 (the precision the S22 QNN float path matches)?' --no-timing --models 'mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt' 'mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt' 'mobileclip2-s0#checkpoints/015_ft-s0-contrastive/model.pt' clip-b16
+[experiment 019_compare-finetuned] Fine-tuned students head to head (FP32)
+refcocog_val/fold0: 300 images, 691 captions
+refcocog_val/fold1: 300 images, 658 captions
+refcocog_val/fold2: 300 images, 692 captions
+refcocog_val/fold3: 300 images, 698 captions
+refcocog_val/fold4: 300 images, 718 captions
+lpcvc_sample: 56 images, 211 captions
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt refcocog   fracR@10= 87.28 [ 85.9, 88.6] n=1500 folds 86.5-88.3
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt sample     fracR@10= 91.37 [ 85.5, 96.3] n=56
+mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt refcocog   fracR@10= 88.01 [ 86.6, 89.3] n=1500 folds 86.8-90.4
+mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt sample     fracR@10= 92.86 [ 87.4, 97.5] n=56
+mobileclip2-s0#checkpoints/015_ft-s0-contrastive/model.pt refcocog   fracR@10= 82.26 [ 80.7, 83.8] n=1500 folds 80.0-84.2
+mobileclip2-s0#checkpoints/015_ft-s0-contrastive/model.pt sample     fracR@10= 90.71 [ 85.1, 95.6] n=56
+clip-b16               refcocog   fracR@10= 63.19 [ 61.2, 65.2] n=1500 folds 61.0-67.8
+clip-b16               sample     fracR@10= 87.35 [ 80.6, 93.4] n=56
+paired deltas vs mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt on refcocog:
+    mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt +0.73 pts  (95% CI -0.3 .. +1.8)
+  * mobileclip2-s0#checkpoints/015_ft-s0-contrastive/model.pt -5.02 pts  (95% CI -6.3 .. -3.7)
+  * clip-b16               -24.09 pts  (95% CI -26.0 .. -22.1)
+paired deltas vs mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt on sample:
+    mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt +1.49 pts  (95% CI -0.4 .. +3.7)
+    mobileclip2-s0#checkpoints/015_ft-s0-contrastive/model.pt -0.65 pts  (95% CI -3.1 .. +1.5)
+  * clip-b16               -4.02 pts  (95% CI -6.9 .. -1.6)

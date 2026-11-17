@@ -1,0 +1,50 @@
+
+===== 2026-11-17T21:48:29+00:00  .venv/python scripts/aihub_run.py --exp s22-finetuned-s3 --title 'Fine-tuned MobileCLIP2-S3 on the Galaxy S22' --question 'Does the fine-tuned S3 (exp 017) stay under 35 ms with full on-device fidelity?' --models 'mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt'
+[experiment 018_s22-finetuned-s3] Fine-tuned MobileCLIP2-S3 on the Galaxy S22
+device=Samsung Galaxy S22 (Family)  datasets={'image': 'd9plzqzd2', 'text': 'd95pj8jz2'}
+exporting mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt ...
+compile mobileclip2-s3_checkpoints_017_ft-s3-contrastive_model.pt/image: https://workbench.aihub.qualcomm.com/jobs/jgz00r9z5/
+compile mobileclip2-s3_checkpoints_017_ft-s3-contrastive_model.pt/text: https://workbench.aihub.qualcomm.com/jobs/jgnwwe6vg/
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt img 23.088 + txt 5.265 = 28.353 ms VALID | device sample R@10 92.86 (local 92.86) | fidelity img/txt min 0.9999/1.0000
