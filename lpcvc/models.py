@@ -14,10 +14,13 @@ Append `@<res>` to change the internal image resolution, e.g. `mobileclip2-s0@22
 Append `#<checkpoint>` to load fine-tuned weights (path relative to the repo, written by scripts/train.py), and
 `~<a>` after it to blend them with the pretrained weights (WiSE-FT): theta = (1 - a) * pretrained + a * finetuned.
   e.g. `mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt~0.5`
+Append `+<flag>` (before `@`/`#`) for graph variants that keep the weights (see FLAGS), e.g.
+  `mobileclip2-b+fmask+gelutanh@224#checkpoints/010_ft-b-contrastive/model.pt`
 """
 from __future__ import annotations
 
 import copy
+import re
 
 import torch
 import torch.nn as nn
@@ -111,6 +114,60 @@ def load_finetuned(clip: nn.Module, ckpt: str, alpha: float = 1.0) -> nn.Module:
     return clip
 
 
+FINITE_MASK = -100.0   # exp(-100) underflows to 0 in FP16/FP32 softmax, yet the range stays quantizable
+
+
+class QuickGELU(nn.Module):
+    """x * sigmoid(1.702 x): sigmoid approximation of GELU (OpenAI CLIP's activation)."""
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return x * torch.sigmoid(1.702 * x)
+
+
+def _swap_gelu(clip: nn.Module, make) -> int:
+    n = 0
+    for parent in list(clip.modules()):
+        for child_name, child in list(parent.named_children()):
+            if isinstance(child, nn.GELU):
+                setattr(parent, child_name, make())
+                n += 1
+    return n
+
+
+def _finite_mask(clip: nn.Module) -> int:
+    """Replace the -inf additive causal mask by FINITE_MASK. Min-max quantizers cannot represent -inf: AI Hub gave
+    the -inf mask a scale of 4.8e-10, which clamps the mask and the masked attention scores to ~0 (exp 008/022)."""
+    n = 0
+    for mod in clip.modules():
+        m = getattr(mod, "attn_mask", None)
+        if isinstance(m, torch.Tensor) and m.is_floating_point() and torch.isinf(m).any():
+            m.copy_(m.clamp(min=FINITE_MASK))
+            n += 1
+    return n
+
+
+FLAGS = {
+    "fmask": _finite_mask,                                                 # finite causal mask (text tower)
+    "gelutanh": lambda c: _swap_gelu(c, lambda: nn.GELU(approximate="tanh")),   # tanh GELU instead of erf
+    "gelusig": lambda c: _swap_gelu(c, QuickGELU),                         # sigmoid GELU (QuickGELU)
+}
+
+
+def split_flags(name: str) -> tuple[str, list[str]]:
+    """'mobileclip2-b+fmask+gelutanh@224' -> ('mobileclip2-b@224', ['fmask', 'gelutanh']) (checkpoint already split)."""
+    flags = re.findall(r"\+([A-Za-z0-9]+)", name)
+    unknown = [f for f in flags if f not in FLAGS]
+    if unknown:
+        raise KeyError(f"unknown model flag(s) {unknown}; known: {sorted(FLAGS)}")
+    return re.sub(r"\+[A-Za-z0-9]+", "", name), flags
+
+
+def apply_flags(clip: nn.Module, flags: list[str]) -> None:
+    for f in flags:
+        if FLAGS[f](clip) == 0:
+            raise ValueError(f"model flag +{f} changed nothing in this model")
+
+
 def parse_name(name: str) -> tuple[str, int | None]:
     if "@" in name:
         base, res = name.split("@")
@@ -122,11 +179,13 @@ def build(name: str, device="cpu") -> tuple[nn.Module, nn.Module]:
     import open_clip
 
     name, ckpt, alpha = split_ckpt(name)
+    name, flags = split_flags(name)
     base, res = parse_name(name)
     if base in ("clip-b16", "clip-b16-norm"):
         clip = open_clip.create_model("ViT-B-16", pretrained="openai")
         if ckpt:
             load_finetuned(clip, ckpt, alpha)
+        apply_flags(clip, flags)
         img = ImageEncoder(clip, res or 224, OPENAI_MEAN, OPENAI_STD, normalize_input=(base == "clip-b16-norm"))
         txt = TextEncoder(clip, zero_pad_after_eot=False)
     elif base in MOBILECLIP2:
@@ -136,6 +195,7 @@ def build(name: str, device="cpu") -> tuple[nn.Module, nn.Module]:
             load_finetuned(clip, ckpt, alpha)
         clip.eval()
         clip = reparameterize(clip)
+        apply_flags(clip, flags)
         cfg = clip.visual.preprocess_cfg
         native = cfg["size"][0] if isinstance(cfg["size"], (tuple, list)) else cfg["size"]
         img = ImageEncoder(clip, res or native, cfg["mean"], cfg["std"], normalize_input=True)

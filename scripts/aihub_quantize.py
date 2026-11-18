@@ -120,6 +120,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--models", nargs="+", required=True)
     ap.add_argument("--precisions", nargs="+", default=["w8a8", "w8a16"], choices=list(PRECISIONS))
+    ap.add_argument("--encoders", nargs="+", default=["image", "text"], choices=["image", "text"],
+                    help="encoders to quantize; the others stay fp32 (FP16 on the NPU) in the combinations table")
     ap.add_argument("--device", default=DEVICE)
     ap.add_argument("--profile-runs", type=int, default=3)
     ap.add_argument("--data", nargs="+", default=["refcocog", "sample"])
@@ -149,6 +151,8 @@ def run(args, exp):
             export(m, onnx_dir)
         for p in args.precisions:
             for enc, (fname, spec) in ENCODERS.items():
+                if enc not in args.encoders:
+                    continue
                 digest = sha256(onnx_dir / fname)
                 qj = quantize_cached(onnx_dir / fname, digest, p, calib_ids[enc], f"{tag}_{enc}_{p}")
                 print(f"quantize {tag}/{enc}/{p}: {qj.url}")
@@ -198,7 +202,7 @@ def run(args, exp):
             emb[(m, "fp32", "text", ds.name)] = torch_embed(m, "text", toks)
             for p in args.precisions:
                 for enc, arr in (("image", imgs), ("text", toks)):
-                    j = jobs[(m, p, enc)]
+                    j = jobs.get((m, p, enc), {})
                     if "qdq_onnx" in j:
                         emb[(m, p, enc, ds.name)] = ort_embed(j["qdq_onnx"], enc, arr)
         print(f"local embeddings done for {m}")
@@ -290,7 +294,8 @@ def run(args, exp):
                 combos.append(row)
     exp.save_json("results.json", {"encoders": enc_rows, "combinations": combos})
     if not any("ms_median" in r for r in enc_rows):
-        raise RuntimeError("no quantized encoder completed on the device; see the errors above")
+        print("!! no quantized encoder completed on the device; tables below carry the onnxruntime accuracy only")
+        exp.headline = "no quantized encoder ran on the S22 (see per-encoder errors); accuracy from onnxruntime only"
     exp.save_npz("per_image_recall.npz", **per_image)
 
     g0 = args.data[0]
