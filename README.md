@@ -19,6 +19,8 @@ conda create -p ./.venv python=3.11 -y          # or python -m venv .venv
 .venv/python -m gdown --folder https://drive.google.com/drive/folders/1tTwrehwLtVtMOTjD5beYDC3lcWIfzS5D -O data/lpcvc_sample
 .venv/python scripts/build_val_set.py              # RefCOCOg-LPCVC validation: 5 folds x 300 images (~250 MB)
 .venv/python scripts/build_train_set.py            # RefCOCO/+/g train, LPCVC-style: 15.9k images, 76k captions (~2.5 GB)
+.venv/python scripts/build_coco_captions_set.py    # same images, COCO captions (control; ~12 MB fetched)
+.venv/python scripts/build_test_set.py             # held-out test fold: 300 RefCOCO/+ images (~50 MB)
 .venv/python scripts/fetch_checkpoints.py 010 015 017   # fine-tuned B/S0/S3 from the team Drive folder (SHA-256 checked)
 & .\scripts\configure_aihub.ps1                   # stores your AI Hub token (hidden prompt)
 .venv/python -m pytest -q tests
@@ -56,6 +58,9 @@ pretrained weights, e.g. `"mobileclip2-b#checkpoints/010_ft-b-contrastive/model.
   95% CI is about ±6 points. **Select on RefCOCOg-LPCVC** (1,500 queries, about ±2 points; see
   `scripts/build_val_set.py` for how it was filtered and normalized to the LPCVC caption style) and report the
   sample as a held-out check.
+- **The test fold (`data/refcoco_test`, from `scripts/build_test_set.py`) is scored once, for the final report.**
+  It shares no image with training, validation or calibration. Nothing is selected or tuned on it, and
+  `eval_local.py` refuses it unless `--final` is passed.
 - **Never train or calibrate on images in `splits/reserved_coco_train2014_ids.txt`** (all RefCOCOg val/test images,
   which are COCO train2014). Filter COCO, RefCOCO/RefCOCO+ and Visual Genome training data against this list.
   Those datasets share COCO train2014 images.
@@ -64,9 +69,9 @@ pretrained weights, e.g. `"mobileclip2-b#checkpoints/010_ft-b-contrastive/model.
 ## Layout
 ```
 lpcvc/          data loading (official preprocessing), metrics, model wrappers, teachers, experiment registry
-scripts/        build_val_set.py, build_train_set.py, build_calib_set.py, eval_local.py, train.py,
+scripts/        build_val_set.py, build_test_set.py, build_train_set.py, build_coco_captions_set.py, build_calib_set.py, eval_local.py, train.py,
                 screen_teachers.py, export_onnx.py, aihub_run.py, aihub_quantize.py, plot_pareto.py
-splits/         committed validation folds, training/calibration image lists, reserved (never-train) COCO IDs
+splits/         committed validation and test folds, training/calibration image lists, reserved (never-train) COCO IDs
 checkpoints/    fine-tuned weights (gitignored; scripts/fetch_checkpoints.py downloads them from Drive)
 tests/          scorer equivalence tests
 experiments/    INDEX.md + one numbered folder per experiment (see above)

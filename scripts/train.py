@@ -53,9 +53,10 @@ CACHE = ROOT / ".cache"
 
 
 # ---- data -----------------------------------------------------------------------------------------
-def load_train(sources=None):
-    items = [json.loads(l) for l in open(TRAIN / "train.jsonl", encoding="utf-8")]
+def load_train(sources=None, train_file=TRAIN / "train.jsonl"):
+    items = [json.loads(l) for l in open(train_file, encoding="utf-8")]
     if sources:   # keep only captions that come from the given source datasets (cross-source ablation)
+        assert Path(train_file).resolve() == (TRAIN / "train.jsonl").resolve(), "--sources needs train_refmix"
         src = json.loads((TRAIN / "caption_sources.json").read_text(encoding="utf-8"))
         items = [{"image": it["image"], "captions": [c for c in it["captions"] if set(src[c]) & set(sources)]}
                  for it in items]
@@ -179,6 +180,8 @@ def main():
     ap.add_argument("--warmup", type=float, default=0.1, help="fraction of steps")
     ap.add_argument("--sources", nargs="*", default=None, choices=["refcoco", "refcocoplus", "refcocog"],
                     help="train only on captions from these datasets (default: all)")
+    ap.add_argument("--train-file", type=Path, default=TRAIN / "train.jsonl",
+                    help="jsonl of {image, captions}; images are always read from data/train_refmix/images")
     ap.add_argument("--freeze", choices=["none", "image", "text"], default="none")
     ap.add_argument("--chunk", type=int, default=0,
                     help="gradient caching chunk size (0 = off). Same loss and gradients as the full batch, "
@@ -200,11 +203,12 @@ def run(args, exp):
     torch.manual_seed(args.seed)
     rng = np.random.default_rng(args.seed)
     dev = args.device
-    paths, caps, img_caps, tokens, digest = load_train(args.sources)
+    paths, caps, img_caps, tokens, digest = load_train(args.sources, args.train_file)
     n_caps_img = np.array([len(c) for c in img_caps])
     print(f"train: {len(paths)} images, {len(caps)} unique captions ({n_caps_img.mean():.2f}/img), data sha {digest}")
     exp.manifest["train_data"] = {"images": len(paths), "captions": len(caps), "content_sha256_prefix": digest,
-                                  "train_jsonl_sha256": hashlib.sha256((TRAIN / "train.jsonl").read_bytes()).hexdigest(),
+                                  "train_jsonl_sha256": hashlib.sha256(Path(args.train_file).read_bytes()).hexdigest(),
+                                  "train_file": Path(args.train_file).resolve().relative_to(ROOT).as_posix(),
                                   "sources": args.sources or "all"}
 
     teachers = []

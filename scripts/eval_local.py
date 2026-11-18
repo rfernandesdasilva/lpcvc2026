@@ -50,13 +50,16 @@ def time_batch1(mod, x, warmup=20, iters=100):
 PRESETS = {
     "sample": ["lpcvc_sample"],
     "refcocog": [f"refcocog_val/fold{k}" for k in range(5)],
+    "test": ["refcoco_test/fold0"],   # held-out; final report only (scripts/build_test_set.py)
 }
 
 
-def resolve_sets(specs: list[str]) -> list[tuple[str, Path]]:
+def resolve_sets(specs: list[str], final: bool = False) -> list[tuple[str, Path]]:
     out = []
     for s in specs:
         for rel in PRESETS.get(s, [s]):
+            if "refcoco_test" in rel and not final:
+                sys.exit("the held-out test fold is scored only for the final report: eval_local.py --data test --final")
             p = Path(rel) if Path(rel).is_absolute() else ROOT / "data" / rel
             out.append((rel, p))
     return out
@@ -66,13 +69,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--models", nargs="+", default=["clip-b16", "clip-b16-norm", "mobileclip2-s0"])
     ap.add_argument("--data", nargs="+", default=["refcocog", "sample"],
-                    help="presets (sample, refcocog) or dirs under data/ in the official layout")
+                    help="presets (sample, refcocog, test) or dirs under data/ in the official layout")
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     ap.add_argument("--no-timing", action="store_true")
+    ap.add_argument("--final", action="store_true", help="allow the held-out test fold (final report only)")
     ap.add_argument("--exp", default="local-screen", help="experiment slug (folder experiments/NNN_<slug>)")
     ap.add_argument("--title", default="Local screening")
     ap.add_argument("--question", default="How do these models rank on the validation sets (local PyTorch FP32)?")
     args = ap.parse_args()
+    resolve_sets(args.data, args.final)   # refuse the test fold before an experiment folder is created
     with Experiment(args.exp, args.title, args.question, args) as exp:
         run(args, exp)
 
@@ -80,7 +85,7 @@ def main():
 def run(args, exp):
 
     sets = []
-    for name, path in resolve_sets(args.data):
+    for name, path in resolve_sets(args.data, args.final):
         ds = load_lpcvc_sample(path)
         ds.name = name
         sets.append((ds, ds.images(), ds.tokens()))
