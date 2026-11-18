@@ -1,0 +1,85 @@
+
+===== 2026-11-18T01:12:49+00:00  .venv/python scripts/eval_local.py --exp grouped-val-screen --title 'All models on the grouped (LPCVC-like) validation folds' --question 'Does the LPCVC-like grouped validation set rank models the same way as RefCOCOg-LPCVC and the sample, and how much of the fine-tuning gain survives on it?' --no-timing --data grouped refcocog sample --models clip-b16 clip-b16-norm mobileclip2-s0 mobileclip2-b mobileclip2-s3 mobileclip2-s4 'mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt' 'mobileclip2-b#checkpoints/012_distill-b-pecore/model.pt' 'mobileclip2-b#checkpoints/013_ft-b-crosssource/model.pt' 'mobileclip2-b#checkpoints/020_ft-b-cococaptions/model.pt' 'mobileclip2-s0#checkpoints/015_ft-s0-contrastive/model.pt' 'mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt'
+[experiment 021_grouped-val-screen] All models on the grouped (LPCVC-like) validation folds
+grouped_val/fold0: 300 images, 1219 captions
+grouped_val/fold1: 300 images, 1236 captions
+grouped_val/fold2: 300 images, 1210 captions
+grouped_val/fold3: 300 images, 1209 captions
+refcocog_val/fold0: 300 images, 691 captions
+refcocog_val/fold1: 300 images, 658 captions
+refcocog_val/fold2: 300 images, 692 captions
+refcocog_val/fold3: 300 images, 698 captions
+refcocog_val/fold4: 300 images, 718 captions
+lpcvc_sample: 56 images, 211 captions
+clip-b16               grouped    fracR@10= 39.72 [ 37.9, 41.5] n=1200 folds 38.4-41.2
+clip-b16               refcocog   fracR@10= 63.19 [ 61.2, 65.2] n=1500 folds 61.0-67.8
+clip-b16               sample     fracR@10= 87.35 [ 80.6, 93.4] n=56
+clip-b16-norm          grouped    fracR@10= 41.73 [ 40.0, 43.5] n=1200 folds 39.8-43.4
+clip-b16-norm          refcocog   fracR@10= 64.72 [ 62.7, 66.8] n=1500 folds 63.3-68.2
+clip-b16-norm          sample     fracR@10= 88.85 [ 82.2, 94.7] n=56
+mobileclip2-s0         grouped    fracR@10= 44.24 [ 42.4, 46.1] n=1200 folds 42.6-45.6
+mobileclip2-s0         refcocog   fracR@10= 69.17 [ 67.3, 71.0] n=1500 folds 68.0-72.4
+mobileclip2-s0         sample     fracR@10= 88.85 [ 82.6, 94.5] n=56
+mobileclip2-b          grouped    fracR@10= 46.18 [ 44.4, 47.9] n=1200 folds 44.4-48.2
+mobileclip2-b          refcocog   fracR@10= 71.31 [ 69.5, 73.1] n=1500 folds 69.8-73.4
+mobileclip2-b          sample     fracR@10= 89.21 [ 83.2, 94.8] n=56
+mobileclip2-s3         grouped    fracR@10= 46.95 [ 45.3, 48.7] n=1200 folds 45.5-48.5
+mobileclip2-s3         refcocog   fracR@10= 72.11 [ 70.4, 74.0] n=1500 folds 70.1-75.4
+mobileclip2-s3         sample     fracR@10= 89.36 [ 83.1, 94.9] n=56
+mobileclip2-s4         grouped    fracR@10= 46.75 [ 45.0, 48.5] n=1200 folds 45.5-48.2
+mobileclip2-s4         refcocog   fracR@10= 71.59 [ 69.7, 73.4] n=1500 folds 70.2-73.9
+mobileclip2-s4         sample     fracR@10= 88.76 [ 82.6, 94.5] n=56
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt grouped    fracR@10= 68.13 [ 66.6, 69.8] n=1200 folds 66.9-69.0
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt refcocog   fracR@10= 87.28 [ 85.9, 88.6] n=1500 folds 86.5-88.3
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt sample     fracR@10= 91.37 [ 85.5, 96.3] n=56
+mobileclip2-b#checkpoints/012_distill-b-pecore/model.pt grouped    fracR@10= 60.98 [ 59.3, 62.7] n=1200 folds 59.4-62.1
+mobileclip2-b#checkpoints/012_distill-b-pecore/model.pt refcocog   fracR@10= 81.86 [ 80.2, 83.4] n=1500 folds 80.6-83.4
+mobileclip2-b#checkpoints/012_distill-b-pecore/model.pt sample     fracR@10= 91.88 [ 86.1, 96.7] n=56
+mobileclip2-b#checkpoints/013_ft-b-crosssource/model.pt grouped    fracR@10= 65.89 [ 64.2, 67.5] n=1200 folds 63.7-68.8
+mobileclip2-b#checkpoints/013_ft-b-crosssource/model.pt refcocog   fracR@10= 84.30 [ 82.7, 85.8] n=1500 folds 82.1-86.8
+mobileclip2-b#checkpoints/013_ft-b-crosssource/model.pt sample     fracR@10= 92.01 [ 86.7, 96.7] n=56
+mobileclip2-b#checkpoints/020_ft-b-cococaptions/model.pt grouped    fracR@10= 50.77 [ 49.1, 52.5] n=1200 folds 49.4-52.8
+mobileclip2-b#checkpoints/020_ft-b-cococaptions/model.pt refcocog   fracR@10= 75.63 [ 73.9, 77.4] n=1500 folds 73.8-77.0
+mobileclip2-b#checkpoints/020_ft-b-cococaptions/model.pt sample     fracR@10= 91.03 [ 85.3, 95.9] n=56
+mobileclip2-s0#checkpoints/015_ft-s0-contrastive/model.pt grouped    fracR@10= 62.65 [ 60.9, 64.3] n=1200 folds 61.4-64.4
+mobileclip2-s0#checkpoints/015_ft-s0-contrastive/model.pt refcocog   fracR@10= 82.26 [ 80.7, 83.8] n=1500 folds 80.0-84.2
+mobileclip2-s0#checkpoints/015_ft-s0-contrastive/model.pt sample     fracR@10= 90.71 [ 85.1, 95.6] n=56
+mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt grouped    fracR@10= 67.64 [ 66.1, 69.2] n=1200 folds 67.1-68.1
+mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt refcocog   fracR@10= 88.01 [ 86.6, 89.3] n=1500 folds 86.8-90.4
+mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt sample     fracR@10= 92.86 [ 87.4, 97.5] n=56
+paired deltas vs clip-b16 on grouped:
+  * clip-b16-norm          +2.02 pts  (95% CI +1.0 .. +3.1)
+  * mobileclip2-s0         +4.53 pts  (95% CI +3.0 .. +6.2)
+  * mobileclip2-b          +6.46 pts  (95% CI +4.9 .. +8.0)
+  * mobileclip2-s3         +7.23 pts  (95% CI +5.7 .. +8.8)
+  * mobileclip2-s4         +7.04 pts  (95% CI +5.5 .. +8.6)
+  * mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt +28.42 pts  (95% CI +26.6 .. +30.2)
+  * mobileclip2-b#checkpoints/012_distill-b-pecore/model.pt +21.27 pts  (95% CI +19.6 .. +22.9)
+  * mobileclip2-b#checkpoints/013_ft-b-crosssource/model.pt +26.17 pts  (95% CI +24.4 .. +28.0)
+  * mobileclip2-b#checkpoints/020_ft-b-cococaptions/model.pt +11.05 pts  (95% CI +9.5 .. +12.7)
+  * mobileclip2-s0#checkpoints/015_ft-s0-contrastive/model.pt +22.93 pts  (95% CI +21.2 .. +24.7)
+  * mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt +27.92 pts  (95% CI +26.2 .. +29.7)
+paired deltas vs clip-b16 on refcocog:
+  * clip-b16-norm          +1.53 pts  (95% CI +0.5 .. +2.6)
+  * mobileclip2-s0         +5.98 pts  (95% CI +4.4 .. +7.6)
+  * mobileclip2-b          +8.12 pts  (95% CI +6.6 .. +9.7)
+  * mobileclip2-s3         +8.92 pts  (95% CI +7.4 .. +10.5)
+  * mobileclip2-s4         +8.40 pts  (95% CI +6.9 .. +10.1)
+  * mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt +24.09 pts  (95% CI +22.1 .. +26.0)
+  * mobileclip2-b#checkpoints/012_distill-b-pecore/model.pt +18.67 pts  (95% CI +17.0 .. +20.4)
+  * mobileclip2-b#checkpoints/013_ft-b-crosssource/model.pt +21.11 pts  (95% CI +19.3 .. +23.1)
+  * mobileclip2-b#checkpoints/020_ft-b-cococaptions/model.pt +12.44 pts  (95% CI +10.8 .. +14.1)
+  * mobileclip2-s0#checkpoints/015_ft-s0-contrastive/model.pt +19.07 pts  (95% CI +17.2 .. +21.0)
+  * mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt +24.82 pts  (95% CI +22.9 .. +26.7)
+paired deltas vs clip-b16 on sample:
+    clip-b16-norm          +1.50 pts  (95% CI -0.2 .. +3.5)
+    mobileclip2-s0         +1.50 pts  (95% CI -1.1 .. +4.0)
+    mobileclip2-b          +1.86 pts  (95% CI -0.3 .. +4.2)
+    mobileclip2-s3         +2.01 pts  (95% CI -0.1 .. +4.3)
+    mobileclip2-s4         +1.41 pts  (95% CI -0.8 .. +3.9)
+  * mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt +4.02 pts  (95% CI +1.6 .. +6.9)
+  * mobileclip2-b#checkpoints/012_distill-b-pecore/model.pt +4.52 pts  (95% CI +1.8 .. +7.8)
+  * mobileclip2-b#checkpoints/013_ft-b-crosssource/model.pt +4.66 pts  (95% CI +1.8 .. +8.2)
+  * mobileclip2-b#checkpoints/020_ft-b-cococaptions/model.pt +3.68 pts  (95% CI +1.3 .. +6.3)
+  * mobileclip2-s0#checkpoints/015_ft-s0-contrastive/model.pt +3.36 pts  (95% CI +1.2 .. +5.9)
+  * mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt +5.51 pts  (95% CI +2.3 .. +9.3)

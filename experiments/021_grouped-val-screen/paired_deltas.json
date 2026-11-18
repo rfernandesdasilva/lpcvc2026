@@ -1,0 +1,155 @@
+{
+ "clip-b16 -> mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt": {
+  "grouped": [
+   28.42,
+   26.6,
+   30.2
+  ],
+  "refcocog": [
+   24.09,
+   22.1,
+   26.0
+  ],
+  "sample": [
+   4.02,
+   1.6,
+   6.9
+  ]
+ },
+ "mobileclip2-b -> mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt": {
+  "grouped": [
+   21.95,
+   20.3,
+   23.7
+  ],
+  "refcocog": [
+   15.96,
+   14.2,
+   17.6
+  ],
+  "sample": [
+   2.16,
+   0.4,
+   4.2
+  ]
+ },
+ "mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt -> mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt": {
+  "grouped": [
+   -0.49,
+   -1.5,
+   0.6
+  ],
+  "refcocog": [
+   0.73,
+   -0.3,
+   1.8
+  ],
+  "sample": [
+   1.49,
+   -0.4,
+   3.7
+  ]
+ },
+ "mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt -> mobileclip2-b#checkpoints/013_ft-b-crosssource/model.pt": {
+  "grouped": [
+   -2.24,
+   -3.2,
+   -1.2
+  ],
+  "refcocog": [
+   -2.98,
+   -4.0,
+   -2.0
+  ],
+  "sample": [
+   0.64,
+   -0.7,
+   2.2
+  ]
+ },
+ "mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt -> mobileclip2-b#checkpoints/020_ft-b-cococaptions/model.pt": {
+  "grouped": [
+   -17.36,
+   -19.0,
+   -15.8
+  ],
+  "refcocog": [
+   -11.65,
+   -13.3,
+   -10.1
+  ],
+  "sample": [
+   -0.34,
+   -1.8,
+   0.9
+  ]
+ },
+ "mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt -> mobileclip2-b#checkpoints/012_distill-b-pecore/model.pt": {
+  "grouped": [
+   -7.15,
+   -8.4,
+   -6.0
+  ],
+  "refcocog": [
+   -5.42,
+   -6.7,
+   -4.2
+  ],
+  "sample": [
+   0.51,
+   -0.6,
+   1.8
+  ]
+ },
+ "mobileclip2-b -> mobileclip2-b#checkpoints/020_ft-b-cococaptions/model.pt": {
+  "grouped": [
+   4.59,
+   3.6,
+   5.7
+  ],
+  "refcocog": [
+   4.31,
+   3.2,
+   5.4
+  ],
+  "sample": [
+   1.82,
+   0.4,
+   3.9
+  ]
+ },
+ "mobileclip2-b -> mobileclip2-s3": {
+  "grouped": [
+   0.77,
+   -0.0,
+   1.6
+  ],
+  "refcocog": [
+   0.79,
+   0.1,
+   1.5
+  ],
+  "sample": [
+   0.15,
+   -1.5,
+   1.7
+  ]
+ },
+ "clip-b16 -> clip-b16-norm": {
+  "grouped": [
+   2.02,
+   1.0,
+   3.1
+  ],
+  "refcocog": [
+   1.53,
+   0.5,
+   2.6
+  ],
+  "sample": [
+   1.5,
+   -0.2,
+   3.5
+  ]
+ }
+}

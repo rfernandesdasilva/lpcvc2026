@@ -1,0 +1,92 @@
+{
+ "args": {
+  "models": [
+   "clip-b16",
+   "mobileclip2-b",
+   "mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt",
+   "mobileclip2-b#checkpoints/020_ft-b-cococaptions/model.pt"
+  ],
+  "data": [
+   "grouped",
+   "refcocog"
+  ],
+  "n": 56,
+  "draws": 200,
+  "seed": 0,
+  "out": "experiments/021_grouped-val-screen/pool56.json"
+ },
+ "results": {
+  "clip-b16": {
+   "grouped": {
+    "frac_R@10": 0.7391521843112245,
+    "p5_p95": [
+     0.6764583333333334,
+     0.8020982142857143
+    ],
+    "mean_pool": 229.2775
+   },
+   "refcocog": {
+    "frac_R@10": 0.8552135416666667,
+    "p5_p95": [
+     0.7836235119047619,
+     0.9169791666666667
+    ],
+    "mean_pool": 129.293
+   }
+  },
+  "mobileclip2-b": {
+   "grouped": {
+    "frac_R@10": 0.7859735065901361,
+    "p5_p95": [
+     0.7232068452380952,
+     0.8421152210884354
+    ],
+    "mean_pool": 229.2775
+   },
+   "refcocog": {
+    "frac_R@10": 0.8937641156462585,
+    "p5_p95": [
+     0.8288392857142857,
+     0.9508928571428571
+    ],
+    "mean_pool": 129.293
+   }
+  },
+  "mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt": {
+   "grouped": {
+    "frac_R@10": 0.91966512542517,
+    "p5_p95": [
+     0.8802008928571428,
+     0.9556760204081632
+    ],
+    "mean_pool": 229.2775
+   },
+   "refcocog": {
+    "frac_R@10": 0.9797924957482993,
+    "p5_p95": [
+     0.9508928571428571,
+     1.0
+    ],
+    "mean_pool": 129.293
+   }
+  },
+  "mobileclip2-b#checkpoints/020_ft-b-cococaptions/model.pt": {
+   "grouped": {
+    "frac_R@10": 0.81909090667517,
+    "p5_p95": [
+     0.7597842261904761,
+     0.8694887329931973
+    ],
+    "mean_pool": 229.2775
+   },
+   "refcocog": {
+    "frac_R@10": 0.9188664753401361,
+    "p5_p95": [
+     0.8598724489795918,
+     0.96875
+    ],
+    "mean_pool": 129.293
+   }
+  }
+ }
+}
