@@ -23,3 +23,4 @@ In the order they were run. Each folder has a README (question, how to reproduce
 | [017](017_ft-s3-contrastive/README.md) | 2026-11-17 | Fine-tune MobileCLIP2-S3, contrastive (same recipe as 010) | ok | mobileclip2-s3 refcocog: 72.08 -> 87.95 (+15.87) | `5fceb28` |
 | [018](018_s22-finetuned-s3/README.md) | 2026-11-17 | Fine-tuned MobileCLIP2-S3 on the Galaxy S22 | ok | best valid by RefCOCOg: mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt (28.4 ms) | `5fceb28` |
 | [019](019_compare-finetuned/README.md) | 2026-11-17 | Fine-tuned students head to head (FP32) | ok | best on refcocog: mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt 88.01 | `5fceb28` |
+| [020](020_ft-b-cococaptions/README.md) | 2026-11-18 | Fine-tune MobileCLIP2-B on COCO Captions (caption-type control) | ok | mobileclip2-b refcocog: 71.38 -> 75.69 (+4.31) | `3c2fa78` |
