@@ -1,0 +1,53 @@
+
+===== 2026-11-18T02:37:59+00:00  .venv/python scripts/aihub_quantize.py --exp s22-quant-finite-mask --title 'B text encoder PTQ with a finite causal mask' --question 'Does replacing the -inf causal mask with -100 rescue PTQ of MobileCLIP2-B'"'"'s text encoder (w8a16, w8a8), and does the quantized text graph now run on the S22?' --models mobileclip2-b+fmask --encoders text --precisions w8a16 w8a8 --profile-runs 3
+[experiment 022_s22-quant-finite-mask] B text encoder PTQ with a finite causal mask
+quantize mobileclip2-b+fmask/text/w8a16: https://workbench.aihub.qualcomm.com/jobs/jp3rryrzp/
+quantize mobileclip2-b+fmask/text/w8a8: https://workbench.aihub.qualcomm.com/jobs/jgo99j9dg/
+Downloaded model to C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-b+fmask\w8a16\text_encoder.onnx.onnx.zip
+compile mobileclip2-b+fmask/text/w8a16: https://workbench.aihub.qualcomm.com/jobs/j5qddjnmg/
+Downloaded model to C:\Users\rfs12\Documents\lpcvc2026\exported\mobileclip2-b+fmask\w8a8\text_encoder.onnx.onnx.zip
+compile mobileclip2-b+fmask/text/w8a8: https://workbench.aihub.qualcomm.com/jobs/jp3rrkj3p/
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+local embeddings done for mobileclip2-b+fmask
+!! no quantized encoder completed on the device; tables below carry the onnxruntime accuracy only

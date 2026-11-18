@@ -2,13 +2,37 @@
 __pycache__/
 *.pyc
 .pytest_cache/
+*.egg-info/
+.ipynb_checkpoints/
+
+# datasets, exported graphs, weights and caches (weights ship as GitHub release assets; see README)
 data/
 exported/
 checkpoints/
 *.onnx
 *.onnx.data
 *.pt
+*.pth
 *.ckpt
-results/runs/*.npz
-results/runs/*.npy
+*.safetensors
+*.dlc
+*.tflite
+*.bin
+*.zip
+results/runs/
 .cache/
+
+# secrets and local machine config (AI Hub token lives in ~/.qai_hub/client.ini, never here)
+.env
+.env.*
+*.env
+client.ini
+.qai_hub/
+*.pem
+*.key
+.netrc
+
+# editor / tool state
+.vscode/
+.idea/
+.claude/

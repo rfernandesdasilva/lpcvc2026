@@ -1,0 +1,141 @@
+
+===== 2026-11-18T02:38:07+00:00  .venv/python scripts/aihub_run.py --exp s22-gelu-variants --title 'GELU approximations on the S22 (fine-tuned B)' --question 'How much S22 latency does replacing erf GELU with the tanh or sigmoid approximation save in MobileCLIP2-B (image and text), measured against a same-session control?' --models 'mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt' 'mobileclip2-b+gelutanh#checkpoints/010_ft-b-contrastive/model.pt' 'mobileclip2-b+gelusig#checkpoints/010_ft-b-contrastive/model.pt' --profile-runs 3
+[experiment 023_s22-gelu-variants] GELU approximations on the S22 (fine-tuned B)
+device=Samsung Galaxy S22 (Family)  datasets={'image': 'd9plzqzd2', 'text': 'd95pj8jz2'}
+compile mobileclip2-b_checkpoints_010_ft-b-contrastive_model.pt/image: https://workbench.aihub.qualcomm.com/jobs/jpennjx0p/
+compile mobileclip2-b_checkpoints_010_ft-b-contrastive_model.pt/text: https://workbench.aihub.qualcomm.com/jobs/jgz001y65/
+exporting mobileclip2-b+gelutanh#checkpoints/010_ft-b-contrastive/model.pt ...
+compile mobileclip2-b_gelutanh_checkpoints_010_ft-b-contrastive_model.pt/image: https://workbench.aihub.qualcomm.com/jobs/jg9qq6qvp/
+compile mobileclip2-b_gelutanh_checkpoints_010_ft-b-contrastive_model.pt/text: https://workbench.aihub.qualcomm.com/jobs/jpr77zmeg/
+exporting mobileclip2-b+gelusig#checkpoints/010_ft-b-contrastive/model.pt ...
+compile mobileclip2-b_gelusig_checkpoints_010_ft-b-contrastive_model.pt/image: https://workbench.aihub.qualcomm.com/jobs/jglqqjdlp/
+compile mobileclip2-b_gelusig_checkpoints_010_ft-b-contrastive_model.pt/text: https://workbench.aihub.qualcomm.com/jobs/j5wrrjkjp/
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+[31m
+===WARNING===
+
+submit_profile_job is deprecated and will be removed in a future release. Use submit_inference_job(..., profile=True) going forward. submit_profile_job now returns an InferenceJob.
+
+===WARNING===
+[0m
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt img 14.406 + txt 3.261 = 17.667 ms VALID | device sample R@10 91.37 (local 91.37) | fidelity img/txt min 0.9999/1.0000
+mobileclip2-b+gelutanh#checkpoints/010_ft-b-contrastive/model.pt img 14.431 + txt 3.262 = 17.693 ms VALID | device sample R@10 91.37 (local 91.37) | fidelity img/txt min 0.9999/1.0000
+mobileclip2-b+gelusig#checkpoints/010_ft-b-contrastive/model.pt img 12.645 + txt 2.837 = 15.482 ms VALID | device sample R@10 91.64 (local 91.64) | fidelity img/txt min 0.9999/1.0000

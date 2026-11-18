@@ -1,0 +1,60 @@
+{
+  "id": "022",
+  "slug": "s22-quant-finite-mask",
+  "title": "B text encoder PTQ with a finite causal mask",
+  "question": "Does replacing the -inf causal mask with -100 rescue PTQ of MobileCLIP2-B's text encoder (w8a16, w8a8), and does the quantized text graph now run on the S22?",
+  "command": ".venv/python scripts/aihub_quantize.py --exp s22-quant-finite-mask --title 'B text encoder PTQ with a finite causal mask' --question 'Does replacing the -inf causal mask with -100 rescue PTQ of MobileCLIP2-B'\"'\"'s text encoder (w8a16, w8a8), and does the quantized text graph now run on the S22?' --models mobileclip2-b+fmask --encoders text --precisions w8a16 w8a8 --profile-runs 3",
+  "git_commit": "f3d9f6fd683f2b311e6b119a0a351c26d8d9a0f7",
+  "git_dirty": false,
+  "started_utc": "2026-11-18T02:37:59+00:00",
+  "args": {
+    "models": [
+      "mobileclip2-b+fmask"
+    ],
+    "precisions": [
+      "w8a16",
+      "w8a8"
+    ],
+    "encoders": [
+      "text"
+    ],
+    "device": "Samsung Galaxy S22 (Family)",
+    "profile_runs": 3,
+    "data": [
+      "refcocog",
+      "sample"
+    ],
+    "exp": "s22-quant-finite-mask",
+    "title": "B text encoder PTQ with a finite causal mask",
+    "question": "Does replacing the -inf causal mask with -100 rescue PTQ of MobileCLIP2-B's text encoder (w8a16, w8a8), and does the quantized text graph now run on the S22?"
+  },
+  "env": {
+    "python": "3.11.18",
+    "platform": "Windows-10-10.0.26300-SP0",
+    "torch": "2.14.1+cu126",
+    "open_clip": "4.2.2",
+    "timm": "1.0.31",
+    "transformers": "5.23.0",
+    "onnx": "1.23.2",
+    "onnxruntime": "1.32.0",
+    "qai_hub": "0.58.0",
+    "numpy": "2.4.6",
+    "gpu": "NVIDIA GeForce RTX 4080 SUPER"
+  },
+  "status": "ok",
+  "aihub": {
+    "device": "Samsung Galaxy S22 (Family)",
+    "compile_options": "--target_runtime qnn_dlc --truncate_64bit_io",
+    "sample_datasets": {
+      "image": "d9plzqzd2",
+      "text": "d95pj8jz2"
+    },
+    "calibration_datasets": {
+      "image": "d2ql6x3v9",
+      "text": "d2nl653o9"
+    },
+    "calibration": "data/calib_refcocog_train (splits/calib/), 256 images / 512 captions"
+  },
+  "finished_utc": "2026-11-18T03:29:43+00:00",
+  "headline": "no quantized encoder ran on the S22 (see per-encoder errors); accuracy from onnxruntime only"
+}

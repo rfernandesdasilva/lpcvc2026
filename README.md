@@ -22,7 +22,9 @@ conda create -p ./.venv python=3.11 -y          # or python -m venv .venv
 .venv/python scripts/build_coco_captions_set.py    # same images, COCO captions (control; ~12 MB fetched)
 .venv/python scripts/build_grouped_val_set.py      # LPCVC-like multi-instance validation: 4 folds x 300 images
 .venv/python scripts/build_test_set.py             # held-out test fold: 300 RefCOCO/+ images (~50 MB)
-.venv/python scripts/fetch_checkpoints.py 010 015 017   # fine-tuned B/S0/S3 from the team Drive folder (SHA-256 checked)
+gh release download weights-v1 -D checkpoints/_download   # fine-tuned weights, attached to this repo's release
+.venv/python scripts/fetch_checkpoints.py --local       # verifies SHA-256 and moves them to checkpoints/<exp>/model.pt
+#   (or: .venv/python scripts/fetch_checkpoints.py 010 015 017   to fetch from the team Drive folder instead)
 & .\scripts\configure_aihub.ps1                   # stores your AI Hub token (hidden prompt)
 .venv/python -m pytest -q tests
 ```
@@ -49,6 +51,9 @@ Model names (see `lpcvc/models.py`): `clip-b16` (official baseline as shipped), 
 `mobileclip2-s2`, `mobileclip2-b`, `mobileclip2-s3`, `mobileclip2-s4`; add `@<res>` for a different internal image
 resolution, e.g. `mobileclip2-s0@192`; add `#<checkpoint>` for fine-tuned weights and `~<a>` to blend them with the
 pretrained weights, e.g. `"mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt"`. Every script accepts these names.
+Graph flags go before `@`/`#` and keep the weights: `+fmask` (finite −100 causal mask, needed to quantize B's text
+tower), `+gelutanh`, `+gelusig` (QuickGELU, 12% faster on the S22), e.g.
+`"mobileclip2-b+gelusig#checkpoints/010_ft-b-contrastive/model.pt"` is the QuickGELU variant of fine-tuned B (exp 023).
 
 ### Ground rules
 - Every encoder takes the **official interface** (image `1x3x224x224` float in [0,1], no normalization; text `1x77`
@@ -76,9 +81,10 @@ lpcvc/          data loading (official preprocessing), metrics, model wrappers, 
 scripts/        build_val_set.py, build_grouped_val_set.py, build_test_set.py, build_train_set.py, build_coco_captions_set.py, build_calib_set.py, eval_local.py, subsample_pool.py, train.py,
                 screen_teachers.py, export_onnx.py, aihub_run.py, aihub_quantize.py, plot_pareto.py
 splits/         committed validation and test folds, training/calibration image lists, reserved (never-train) COCO IDs
-checkpoints/    fine-tuned weights (gitignored; scripts/fetch_checkpoints.py downloads them from Drive)
+checkpoints/    fine-tuned weights (gitignored; GitHub release weights-v1, or scripts/fetch_checkpoints.py from Drive)
 tests/          scorer equivalence tests
 experiments/    INDEX.md + one numbered folder per experiment (see above)
+docs/           project review (2026-11-17), presentation slides (HTML source + 16:9 PDF)
 third_party/    lpcvc_sample (official sample solution), ml-mobileclip (submodules, unmodified)
 ```
 

@@ -1,0 +1,82 @@
+{
+  "encoders": [
+    {
+      "model": "mobileclip2-b+fmask",
+      "precision": "w8a16",
+      "encoder": "text",
+      "error": "RuntimeError: profile job jgo99y2qg failed on device: Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+    },
+    {
+      "model": "mobileclip2-b+fmask",
+      "precision": "w8a8",
+      "encoder": "text",
+      "error": "RuntimeError: profile job jgz00e2o5 failed on device: Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR."
+    }
+  ],
+  "combinations": [
+    {
+      "model": "mobileclip2-b+fmask",
+      "image": "fp32",
+      "text": "fp32",
+      "total_ms": NaN,
+      "refcocog_frac_R@10": 0.7131412698412699,
+      "refcocog_ci95": [
+        0.6953185515873015,
+        0.7312127976190476
+      ],
+      "delta_vs_fp32": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sample_frac_R@10": 0.8921130952380951,
+      "sample_ci95": [
+        0.8321354166666666,
+        0.9480691964285715
+      ],
+      "sample_device_frac_R@10": 0.8921130952380951
+    },
+    {
+      "model": "mobileclip2-b+fmask",
+      "image": "fp32",
+      "text": "w8a16",
+      "total_ms": NaN,
+      "refcocog_frac_R@10": 0.7128198412698412,
+      "refcocog_ci95": [
+        0.6953761706349206,
+        0.7309628174603174
+      ],
+      "delta_vs_fp32": [
+        -0.0003214285714285712,
+        -0.0030666666666666663,
+        0.0021735912698412673
+      ],
+      "sample_frac_R@10": 0.8882440476190475,
+      "sample_ci95": [
+        0.8221726190476192,
+        0.9452418154761906
+      ]
+    },
+    {
+      "model": "mobileclip2-b+fmask",
+      "image": "fp32",
+      "text": "w8a8",
+      "total_ms": NaN,
+      "refcocog_frac_R@10": 0.012927777777777778,
+      "refcocog_ci95": [
+        0.009016527777777778,
+        0.01753444444444444
+      ],
+      "delta_vs_fp32": [
+        -0.700213492063492,
+        -0.71897251984127,
+        -0.6821253769841268
+      ],
+      "sample_frac_R@10": 0.02976190476190476,
+      "sample_ci95": [
+        0.00744047619047619,
+        0.06101190476190476
+      ]
+    }
+  ]
+}

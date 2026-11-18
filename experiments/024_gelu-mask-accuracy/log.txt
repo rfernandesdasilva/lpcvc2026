@@ -1,0 +1,37 @@
+
+===== 2026-11-18T02:38:14+00:00  .venv/python scripts/eval_local.py --exp gelu-mask-accuracy --title 'Finite mask and GELU approximations: FP32 accuracy of fine-tuned B (no retraining)' --question 'Do the finite causal mask and the tanh/sigmoid GELU approximations change the accuracy of fine-tuned MobileCLIP2-B without retraining?' --models 'mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt' 'mobileclip2-b+fmask#checkpoints/010_ft-b-contrastive/model.pt' 'mobileclip2-b+gelutanh#checkpoints/010_ft-b-contrastive/model.pt' 'mobileclip2-b+gelusig#checkpoints/010_ft-b-contrastive/model.pt' --data refcocog grouped sample --no-timing
+[experiment 024_gelu-mask-accuracy] Finite mask and GELU approximations: FP32 accuracy of fine-tuned B (no retraining)
+refcocog_val/fold0: 300 images, 691 captions
+refcocog_val/fold1: 300 images, 658 captions
+refcocog_val/fold2: 300 images, 692 captions
+refcocog_val/fold3: 300 images, 698 captions
+refcocog_val/fold4: 300 images, 718 captions
+grouped_val/fold0: 300 images, 1219 captions
+grouped_val/fold1: 300 images, 1236 captions
+grouped_val/fold2: 300 images, 1210 captions
+grouped_val/fold3: 300 images, 1209 captions
+lpcvc_sample: 56 images, 211 captions
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt refcocog   fracR@10= 87.28 [ 85.9, 88.6] n=1500 folds 86.5-88.3
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt grouped    fracR@10= 68.13 [ 66.6, 69.8] n=1200 folds 66.9-69.0
+mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt sample     fracR@10= 91.37 [ 85.5, 96.3] n=56
+mobileclip2-b+fmask#checkpoints/010_ft-b-contrastive/model.pt refcocog   fracR@10= 87.28 [ 85.9, 88.6] n=1500 folds 86.5-88.3
+mobileclip2-b+fmask#checkpoints/010_ft-b-contrastive/model.pt grouped    fracR@10= 68.13 [ 66.6, 69.8] n=1200 folds 66.9-69.0
+mobileclip2-b+fmask#checkpoints/010_ft-b-contrastive/model.pt sample     fracR@10= 91.37 [ 85.5, 96.3] n=56
+mobileclip2-b+gelutanh#checkpoints/010_ft-b-contrastive/model.pt refcocog   fracR@10= 87.28 [ 85.9, 88.6] n=1500 folds 86.5-88.3
+mobileclip2-b+gelutanh#checkpoints/010_ft-b-contrastive/model.pt grouped    fracR@10= 68.14 [ 66.6, 69.8] n=1200 folds 67.0-68.9
+mobileclip2-b+gelutanh#checkpoints/010_ft-b-contrastive/model.pt sample     fracR@10= 91.37 [ 85.5, 96.3] n=56
+mobileclip2-b+gelusig#checkpoints/010_ft-b-contrastive/model.pt refcocog   fracR@10= 86.52 [ 85.1, 87.9] n=1500 folds 84.9-88.1
+mobileclip2-b+gelusig#checkpoints/010_ft-b-contrastive/model.pt grouped    fracR@10= 66.98 [ 65.4, 68.6] n=1200 folds 66.2-67.8
+mobileclip2-b+gelusig#checkpoints/010_ft-b-contrastive/model.pt sample     fracR@10= 91.64 [ 85.7, 96.5] n=56
+paired deltas vs mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt on refcocog:
+    mobileclip2-b+fmask#checkpoints/010_ft-b-contrastive/model.pt +0.00 pts  (95% CI +0.0 .. +0.0)
+    mobileclip2-b+gelutanh#checkpoints/010_ft-b-contrastive/model.pt +0.00 pts  (95% CI +0.0 .. +0.0)
+  * mobileclip2-b+gelusig#checkpoints/010_ft-b-contrastive/model.pt -0.75 pts  (95% CI -1.4 .. -0.1)
+paired deltas vs mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt on grouped:
+    mobileclip2-b+fmask#checkpoints/010_ft-b-contrastive/model.pt +0.00 pts  (95% CI +0.0 .. +0.0)
+    mobileclip2-b+gelutanh#checkpoints/010_ft-b-contrastive/model.pt +0.01 pts  (95% CI -0.1 .. +0.1)
+  * mobileclip2-b+gelusig#checkpoints/010_ft-b-contrastive/model.pt -1.15 pts  (95% CI -1.9 .. -0.4)
+paired deltas vs mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt on sample:
+    mobileclip2-b+fmask#checkpoints/010_ft-b-contrastive/model.pt +0.00 pts  (95% CI +0.0 .. +0.0)
+    mobileclip2-b+gelutanh#checkpoints/010_ft-b-contrastive/model.pt +0.00 pts  (95% CI +0.0 .. +0.0)
+    mobileclip2-b+gelusig#checkpoints/010_ft-b-contrastive/model.pt +0.27 pts  (95% CI -0.9 .. +1.5)

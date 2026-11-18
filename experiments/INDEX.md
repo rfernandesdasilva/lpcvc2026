@@ -25,3 +25,6 @@ In the order they were run. Each folder has a README (question, how to reproduce
 | [019](019_compare-finetuned/README.md) | 2026-11-17 | Fine-tuned students head to head (FP32) | ok | best on refcocog: mobileclip2-s3#checkpoints/017_ft-s3-contrastive/model.pt 88.01 | `5fceb28` |
 | [020](020_ft-b-cococaptions/README.md) | 2026-11-18 | Fine-tune MobileCLIP2-B on COCO Captions (caption-type control) | ok | mobileclip2-b refcocog: 71.38 -> 75.69 (+4.31) | `3c2fa78` |
 | [021](021_grouped-val-screen/README.md) | 2026-11-18 | All models on the grouped (LPCVC-like) validation folds | ok | best on grouped: mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt 68.13 | `58cc436` |
+| [022](022_s22-quant-finite-mask/README.md) | 2026-11-18 | B text encoder PTQ with a finite causal mask | ok | no quantized encoder ran on the S22 (see per-encoder errors); accuracy from onnxruntime only | `f3d9f6f` |
+| [023](023_s22-gelu-variants/README.md) | 2026-11-18 | GELU approximations on the S22 (fine-tuned B) | ok | best valid by RefCOCOg: mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt (17.7 ms) | `f3d9f6f` |
+| [024](024_gelu-mask-accuracy/README.md) | 2026-11-18 | Finite mask and GELU approximations: FP32 accuracy of fine-tuned B (no retraining) | ok | best on refcocog: mobileclip2-b#checkpoints/010_ft-b-contrastive/model.pt 87.28 | `f3d9f6f` |
