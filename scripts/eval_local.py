@@ -50,6 +50,7 @@ def time_batch1(mod, x, warmup=20, iters=100):
 PRESETS = {
     "sample": ["lpcvc_sample"],
     "refcocog": [f"refcocog_val/fold{k}" for k in range(5)],
+    "grouped": [f"grouped_val/fold{k}" for k in range(4)],   # LPCVC-like multi-instance images
     "test": ["refcoco_test/fold0"],   # held-out; final report only (scripts/build_test_set.py)
 }
 
@@ -69,7 +70,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--models", nargs="+", default=["clip-b16", "clip-b16-norm", "mobileclip2-s0"])
     ap.add_argument("--data", nargs="+", default=["refcocog", "sample"],
-                    help="presets (sample, refcocog, test) or dirs under data/ in the official layout")
+                    help="presets (sample, refcocog, grouped, test) or dirs under data/ in the official layout")
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     ap.add_argument("--no-timing", action="store_true")
     ap.add_argument("--final", action="store_true", help="allow the held-out test fold (final report only)")
