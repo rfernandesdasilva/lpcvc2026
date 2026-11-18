@@ -22,9 +22,7 @@ conda create -p ./.venv python=3.11 -y          # or python -m venv .venv
 .venv/python scripts/build_coco_captions_set.py    # same images, COCO captions (control; ~12 MB fetched)
 .venv/python scripts/build_grouped_val_set.py      # LPCVC-like multi-instance validation: 4 folds x 300 images
 .venv/python scripts/build_test_set.py             # held-out test fold: 300 RefCOCO/+ images (~50 MB)
-gh release download weights-v1 -D checkpoints/_download   # fine-tuned weights, attached to this repo's release
-.venv/python scripts/fetch_checkpoints.py --local       # verifies SHA-256 and moves them to checkpoints/<exp>/model.pt
-#   (or: .venv/python scripts/fetch_checkpoints.py 010 015 017   to fetch from the team Drive folder instead)
+.venv/python scripts/fetch_checkpoints.py 010 015 017   # fine-tuned B/S0/S3 from the team Drive folder (SHA-256 checked)
 & .\scripts\configure_aihub.ps1                   # stores your AI Hub token (hidden prompt)
 .venv/python -m pytest -q tests
 ```
@@ -81,7 +79,7 @@ lpcvc/          data loading (official preprocessing), metrics, model wrappers, 
 scripts/        build_val_set.py, build_grouped_val_set.py, build_test_set.py, build_train_set.py, build_coco_captions_set.py, build_calib_set.py, eval_local.py, subsample_pool.py, train.py,
                 screen_teachers.py, export_onnx.py, aihub_run.py, aihub_quantize.py, plot_pareto.py
 splits/         committed validation and test folds, training/calibration image lists, reserved (never-train) COCO IDs
-checkpoints/    fine-tuned weights (gitignored; GitHub release weights-v1, or scripts/fetch_checkpoints.py from Drive)
+checkpoints/    fine-tuned weights (gitignored, not on GitHub; scripts/fetch_checkpoints.py downloads them from Drive)
 tests/          scorer equivalence tests
 experiments/    INDEX.md + one numbered folder per experiment (see above)
 docs/           project review (2026-11-17), presentation slides (HTML source + 16:9 PDF)

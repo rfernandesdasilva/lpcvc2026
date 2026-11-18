@@ -5,7 +5,7 @@ __pycache__/
 *.egg-info/
 .ipynb_checkpoints/
 
-# datasets, exported graphs, weights and caches (weights ship as GitHub release assets; see README)
+# datasets, exported graphs, weights and caches (weights are not on GitHub; see README)
 data/
 exported/
 checkpoints/
